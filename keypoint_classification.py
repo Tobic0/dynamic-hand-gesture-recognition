@@ -7,9 +7,9 @@ import numpy as np
 import os
 
 
-PATH = os.path.join('video/gestures_data_right')
+PATH = os.path.join('video/gestures_data')
 
-actions = np.array(['hello', 'pick-up', 'stop'])
+actions = np.array(['general', 'hello', 'pick-up', 'stop', 'peace', 'okay', 'continue'])
 # Number of videos recorded per gesture
 no_sequences = 10
 # Number of frames for each video
@@ -64,10 +64,8 @@ model.add(Dense(actions.shape[0], activation='softmax'))
 model.summary()
 
 model.compile(optimizer='Adam', loss='categorical_crossentropy', metrics=['categorical_accuracy'])
-history = model.fit(X_train, y_train, epochs=170, callbacks=[tb_callback])
-# print(history.history.keys())
-
-# plot_acc_loss_history(history)
+history = model.fit(X_train, y_train, epochs=500, callbacks=[tb_callback])
+print(history.history.keys())
 
 # Save model weights
-# model.save('gesture.h5')
+model.save('gesture.h5')
