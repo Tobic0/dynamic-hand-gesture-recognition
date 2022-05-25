@@ -9,9 +9,7 @@ mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
 mp_hands = mp.solutions.hands
 
-actions = np.array(['hello', 'pick-up', 'stop'])
-# Number of videos recorded per gesture
-no_sequences = 5
+actions = np.array(['general', 'hello', 'pick-up', 'stop', 'peace', 'okay', 'continue'])
 # Number of frames for each video
 sequence_length = 30
 
@@ -97,7 +95,11 @@ def main():
 
                     if len(sequence) == 30:
                         res = model.predict(np.expand_dims(sequence, axis=0))[0]
-                        print(res, " -> ", actions[np.argmax(res)])
+                        #if actions[np.argmax(res)] != "general":
+                            # print("classic: ", res, " -> ", actions[np.argmax(res)])
+
+                        if (actions[np.argmax(res)] != "general") & (res[np.argmax(res)] > threshold):
+                            print("threshold: ", res, " -> ", actions[np.argmax(res)])
 
                         if res[np.argmax(res)] > threshold:
                             if len(sentence) > 0:
