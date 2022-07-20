@@ -9,7 +9,7 @@ mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
 mp_hands = mp.solutions.hands
 
-actions = np.array(['general', 'hello', 'pick-up', 'stop', 'peace', 'okay', 'continue'])
+actions = np.array(['general', 'hello', 'pick-up', 'stop', 'okay', 'continue', 'next', 'previous', 'hold'])
 # Number of frames for each video
 sequence_length = 30
 
@@ -35,7 +35,7 @@ def main():
 
     sequence = []
     sentence = []
-    threshold = 0.8
+    threshold = 0.75
 
     cap = cv2.VideoCapture(0)
     with mp_hands.Hands(model_complexity=0, max_num_hands=2, min_detection_confidence=0.5,
@@ -90,8 +90,10 @@ def main():
                     # Normalization of landmarks list using linear scaling
                     h_landmarks = np.array(list(map(lambda value: (value - min_value) / (max_value - min_value),
                                                     h_landmarks)))
+
                     sequence.insert(0, h_landmarks)
                     sequence = sequence[:30]
+                    #print("sequence[in]: ", sequence)
 
                     if len(sequence) == 30:
                         res = model.predict(np.expand_dims(sequence, axis=0))[0]
@@ -101,7 +103,7 @@ def main():
                         if (actions[np.argmax(res)] != "general") & (res[np.argmax(res)] > threshold):
                             print("threshold: ", res, " -> ", actions[np.argmax(res)])
 
-                        if res[np.argmax(res)] > threshold:
+                        if (res[np.argmax(res)] > threshold) & (actions[np.argmax(res)] != "general"):
                             if len(sentence) > 0:
                                 if actions[np.argmax(res)] != sentence[-1]:
                                     sentence.append(actions[np.argmax(res)])
@@ -111,6 +113,7 @@ def main():
                         if len(sentence) > 5:
                             sentence = sentence[-5:]
 
+                    #print("sentence: ", sentence)
                     cv2.putText(image, ' '.join(sentence), (3, 30),
                                 cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
 
@@ -120,6 +123,18 @@ def main():
                                               mp_hands.HAND_CONNECTIONS,
                                               mp_drawing_styles.get_default_hand_landmarks_style(),
                                               mp_drawing_styles.get_default_hand_connections_style())
+            else:
+
+                # If no hand is detected generate an array with 63 zeros
+                zeroArray = np.zeros(63)
+                sequence.insert(0, zeroArray)
+                sequence = sequence[:30]
+                #print("sequence[out]: ", sequence)
+
+                '''
+                if len(sequence) == 30:
+                    res = model.predict(np.expand_dims(sequence, axis=0))[0]
+                    print(actions[np.argmax(res)])'''
 
             cv2.putText(image, "'ESC' to exit", (5, 20), cv2.FONT_HERSHEY_DUPLEX, 0.6, (0, 0, 0), 1)
 

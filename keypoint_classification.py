@@ -9,7 +9,7 @@ import os
 
 PATH = os.path.join('video/gestures_data')
 
-actions = np.array(['general', 'hello', 'pick-up', 'stop', 'peace', 'okay', 'continue'])
+actions = np.array(['general', 'hello', 'pick-up', 'stop', 'okay', 'continue', 'next', 'previous', 'hold'])
 # Number of videos recorded per gesture
 no_sequences = 10
 # Number of frames for each video
@@ -18,6 +18,7 @@ sequence_length = 30
 label_map = {label: num for num, label in enumerate(actions)}
 print(label_map)
 
+'''
 sequences, labels = [], []
 for action in actions:
     for sequence in range(no_sequences):
@@ -27,7 +28,7 @@ for action in actions:
             window.append(res)
         sequences.append(window)
         labels.append(label_map[action])
-print(np.array(sequences).shape)
+print(np.array(sequences).shape)'''
 
 #
 # Trying to change the fact that you don't need to use fixed number of sequences for each action
@@ -64,7 +65,7 @@ model.add(Dense(actions.shape[0], activation='softmax'))
 model.summary()
 
 model.compile(optimizer='Adam', loss='categorical_crossentropy', metrics=['categorical_accuracy'])
-history = model.fit(X_train, y_train, epochs=500, callbacks=[tb_callback])
+history = model.fit(X_train, y_train, epochs=550, callbacks=[tb_callback])
 print(history.history.keys())
 
 # Save model weights
