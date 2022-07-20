@@ -1,3 +1,4 @@
+tensorboard --logdir=test
 # Hand-Gesture-Recognition
 Hand gesture recognition project based on Google's mediapipe library for hand and finger tracking, and the application of a feedforward neural network for classifying hand gestures.
 
