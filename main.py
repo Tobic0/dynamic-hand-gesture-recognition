@@ -45,7 +45,6 @@ def main():
             image = cv2.flip(image, 1)
             if not success:
                 print("Ignoring empty camera frame.")
-                # If loading a video, use 'break' instead of 'continue'.
                 continue
 
             # To improve performance, optionally mark the image as not writeable to pass by reference
@@ -91,50 +90,46 @@ def main():
                     h_landmarks = np.array(list(map(lambda value: (value - min_value) / (max_value - min_value),
                                                     h_landmarks)))
 
+                    # Add last detected landmarks to sequence list and get only last 30 landmarks
                     sequence.insert(0, h_landmarks)
                     sequence = sequence[:30]
-                    #print("sequence[in]: ", sequence)
 
+                    # Check if sequence length is 30, as classification is trained on 30 frames
                     if len(sequence) == 30:
                         res = model.predict(np.expand_dims(sequence, axis=0))[0]
-                        #if actions[np.argmax(res)] != "general":
-                            # print("classic: ", res, " -> ", actions[np.argmax(res)])
-
-                        if (actions[np.argmax(res)] != "general") & (res[np.argmax(res)] > threshold):
-                            print("threshold: ", res, " -> ", actions[np.argmax(res)])
 
                         if (res[np.argmax(res)] > threshold) & (actions[np.argmax(res)] != "general"):
+                            # Check if sentence has at least one action predicted, if the current action is not the same
+                            # as the last action, append it, otherwise just append
                             if len(sentence) > 0:
                                 if actions[np.argmax(res)] != sentence[-1]:
                                     sentence.append(actions[np.argmax(res)])
                             else:
                                 sentence.append(actions[np.argmax(res)])
 
+                            # Print prediction for each class for current sequence of landmarks
+                            print("threshold: ", res, " -> ", actions[np.argmax(res)])
+
+                        # Reduce the sentence length always to 5
                         if len(sentence) > 5:
                             sentence = sentence[-5:]
 
-                    #print("sentence: ", sentence)
+                    # print("sentence: ", sentence)
+                    # Print on screen the current sentence
                     cv2.putText(image, ' '.join(sentence), (3, 30),
                                 cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
 
-                # Draw hand landmarks
+                # Draw hand landmarks on screen
                 for idx, hand_handedness in enumerate(results.multi_handedness):
                     mp_drawing.draw_landmarks(image, results.multi_hand_landmarks[idx],
                                               mp_hands.HAND_CONNECTIONS,
                                               mp_drawing_styles.get_default_hand_landmarks_style(),
                                               mp_drawing_styles.get_default_hand_connections_style())
             else:
-
-                # If no hand is detected generate an array with 63 zeros
+                # If no hand is detected generate an array with 63 zeros and insert it in sequence
                 zeroArray = np.zeros(63)
                 sequence.insert(0, zeroArray)
                 sequence = sequence[:30]
-                #print("sequence[out]: ", sequence)
-
-                '''
-                if len(sequence) == 30:
-                    res = model.predict(np.expand_dims(sequence, axis=0))[0]
-                    print(actions[np.argmax(res)])'''
 
             cv2.putText(image, "'ESC' to exit", (5, 20), cv2.FONT_HERSHEY_DUPLEX, 0.6, (0, 0, 0), 1)
 

@@ -10,7 +10,6 @@ mp_hands = mp.solutions.hands
 
 PATH = os.path.join('gestures_data')
 
-# actions = np.array(['general', 'hello', 'pick-up', 'stop', 'peace', 'okay', 'continue', 'next', 'previous'])
 actions = np.array(['general', 'hello', 'pick-up', 'stop', 'okay', 'continue', 'next', 'previous', 'hold'])
 # Number of videos recorded per gesture
 no_sequences = 10
@@ -85,7 +84,6 @@ with mp_hands.Hands(model_complexity=0, max_num_hands=2, min_detection_confidenc
 
         if not success:
             print("Ignoring empty camera frame.")
-            # If loading a video, use 'break' instead of 'continue'.
             continue
 
         # To improve performance, optionally mark the image as not writeable to pass by reference
@@ -164,12 +162,6 @@ with mp_hands.Hands(model_complexity=0, max_num_hands=2, min_detection_confidenc
                                     list(map(lambda value: (value - min_value) / (max_value - min_value), h_landmarks)))
                                 # print("np array: ", h_landmarks.shape)
 
-                                # Draw hand landmarks
-                                for idx, hand_handedness in enumerate(results.multi_handedness):
-                                    mp_drawing.draw_landmarks(image, results.multi_hand_landmarks[idx],
-                                                              mp_hands.HAND_CONNECTIONS,
-                                                              mp_drawing_styles.get_default_hand_landmarks_style(),
-                                                              mp_drawing_styles.get_default_hand_connections_style())
                     else:
                         h_landmarks = np.zeros(63)
 
@@ -196,9 +188,6 @@ with mp_hands.Hands(model_complexity=0, max_num_hands=2, min_detection_confidenc
                     print(str(frame_num), ": ", h_landmarks)
             recording = False
             print("Finished recording!")
-
-        '''
-        '''
 
         draw_options(image, opt)
 
