@@ -19,11 +19,11 @@ sequence_length = 30
 label_map = {label: num for num, label in enumerate(actions)}
 
 sequences, labels = [], []
+
 # For each action inside the actions list, get the number of sequences and loop through each of them in order to
 for action in actions:
     for sequence in range(len(os.listdir(PATH+"/"+action))):
         window = []
-        # print(action, "->", sequence, "->", len(os.listdir(PATH + "/" + action + "/" + str(sequence))))
         for frame in range(len(os.listdir(PATH + "/" + action + "/" + str(sequence)))):
             res = np.load(os.path.join(PATH, action, str(sequence), '{}.npy'.format(frame)))
             window.append(res)

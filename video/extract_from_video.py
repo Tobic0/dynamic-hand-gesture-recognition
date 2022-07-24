@@ -33,19 +33,17 @@ def draw_options(_image, op=0):
         for a in range(1, actions.size+1):
             cv2.putText(_image, str(a) + ") Record new key-points for action " + actions[a - 1], (5, 20 + (20 * a)),
                         cv2.FONT_HERSHEY_DUPLEX, 0.7, (0, 0, 0), 2)
-            cv2.putText(_image, str(a)+") Record new key-points for action "+actions[a-1], (5, 20 + (20 * a)),
+            cv2.putText(_image, str(a)+") Record new key-points for action " + actions[a - 1], (5, 20 + (20 * a)),
                         cv2.FONT_HERSHEY_DUPLEX, 0.7, (255, 255, 255), 1)
     elif 1 <= op <= actions.size:
         cv2.putText(_image, "Current action: " + actions[op - 1], (5, 40), cv2.FONT_HERSHEY_SIMPLEX, 0.6,
                     (0, 0, 0), 2)
-        cv2.putText(_image, "Current action: "+actions[op-1], (5, 40), cv2.FONT_HERSHEY_SIMPLEX, 0.6,
+        cv2.putText(_image, "Current action: " + actions[op - 1], (5, 40), cv2.FONT_HERSHEY_SIMPLEX, 0.6,
                     (255, 255, 255), 1)
         cv2.putText(_image, "Press 0 to go back", (5, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.5,
                     (0, 0, 0), 2)
         cv2.putText(_image, "Press 0 to go back", (5, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.5,
                     (255, 255, 255), 1)
-    else:
-        cv2.putText(_image, "test", (5, 40), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 0), 1)
 
 
 # Function for selecting the option from list by pressing on keyboard
@@ -159,7 +157,8 @@ with mp_hands.Hands(model_complexity=0, max_num_hands=2, min_detection_confidenc
 
         draw_options(image, opt)
 
-        cv2.putText(image, "'ESC' to exit", (5, 20), cv2.FONT_HERSHEY_DUPLEX, 0.6, (0, 0, 0), 1)
+        cv2.putText(image, "'ESC' to exit", (5, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 0), 1)
+        cv2.putText(image, "'ESC' to exit", (5, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
 
         # Flip the image horizontally for a selfie-view display.
         cv2.imshow('Dynamic hand gesture recognition', image)

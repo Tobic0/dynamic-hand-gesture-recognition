@@ -1,9 +1,11 @@
 from keras.models import Sequential
 from keras.layers import LSTM, Dense, Dropout
+from tensorflow import keras
 import numpy as np
 import cv2
 import mediapipe as mp
 import landmarks_transformer as lt
+import time
 
 mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
@@ -16,23 +18,18 @@ sequence_length = 30
 
 
 def main():
-    model = Sequential()
-    model.add(LSTM(32, activation='relu', input_shape=(sequence_length, 63)))
-    model.add(Dropout(0.4))
-    model.add(Dense(32, activation='relu'))
-    model.add(Dense(actions.shape[0], activation='softmax'))
-
-    model.compile(optimizer='Adam', loss='categorical_crossentropy', metrics=['categorical_accuracy'])
-    model.load_weights('gesture.h5')
+    # Load keras classification model in order to predict gesture
+    model = keras.models.load_model('gesture.h5')
 
     sequence = []
     sentence = []
-    threshold = 0.75
+    threshold = 0.85
 
     cap = cv2.VideoCapture(0)
     with mp_hands.Hands(model_complexity=0, max_num_hands=2, min_detection_confidence=0.5,
                         min_tracking_confidence=0.5) as hands:
         while cap.isOpened():
+            start_time = time.time()
             success, image = cap.read()
             image = cv2.flip(image, 1)
             if not success:
@@ -103,6 +100,7 @@ def main():
             # Wait until ESC key os pressed to close program
             if cv2.waitKey(10) & 0xFF == 27:
                 break
+            print("FPS: ", 1.0 / (time.time() - start_time))
     cap.release()
 
 
