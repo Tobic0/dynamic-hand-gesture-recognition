@@ -1,0 +1,9 @@
+general
+hello
+pick-up
+stop
+okay
+continue
+next
+previous
+hold
