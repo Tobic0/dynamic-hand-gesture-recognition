@@ -2,6 +2,7 @@ import os
 import cv2
 import numpy as np
 import mediapipe as mp
+import landmarks_extractor as le
 
 
 mp_drawing = mp.solutions.drawing_utils
@@ -10,7 +11,8 @@ mp_hands = mp.solutions.hands
 
 PATH = os.path.join('gestures_data')
 
-actions = np.array(['general', 'hello', 'pick-up', 'stop', 'okay', 'continue', 'next', 'previous', 'hold'])
+# Read gesture classes defined in file CLASSES.txt
+actions = np.array(open("../CLASSES.txt").read().splitlines())
 # Number of videos recorded per gesture
 no_sequences = 10
 # Number of frames for each video
@@ -25,16 +27,7 @@ for action in actions:
         pass
 
 
-def process_landmarks(landmarks):
-    landmark_list = []
-    # Get id and coordinate of each landmark
-    for i, landmark in enumerate(landmarks.landmark):
-        landmark_list.append(np.array([landmark.x, landmark.y, landmark.z]))
-
-    return landmark_list
-
-
-# Function to draw on opencv image the options text
+# Function to draw on opencv image the options menu
 def draw_options(_image, op=0):
     if op == 0:
         for a in range(1, actions.size+1):
@@ -47,11 +40,15 @@ def draw_options(_image, op=0):
                     (0, 0, 0), 2)
         cv2.putText(_image, "Current action: "+actions[op-1], (5, 40), cv2.FONT_HERSHEY_SIMPLEX, 0.6,
                     (255, 255, 255), 1)
+        cv2.putText(_image, "Press 0 to go back", (5, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.5,
+                    (0, 0, 0), 2)
+        cv2.putText(_image, "Press 0 to go back", (5, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.5,
+                    (255, 255, 255), 1)
     else:
         cv2.putText(_image, "test", (5, 40), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 0), 1)
 
 
-# Function for selecting the option from list
+# Function for selecting the option from list by pressing on keyboard
 def select_options(_key, _opt):
     # 0 = 48, 4 = 51
     if 48 <= _key <= (48 + actions.size):
@@ -135,33 +132,7 @@ with mp_hands.Hands(model_complexity=0, max_num_hands=2, min_detection_confidenc
                             # Get all hand landmarks and handedness of detected hands
                             # ZIP: takes iterables (can be zero or more), aggregates them in a tuple, and returns it.
                             for hand_landmarks, handedness in zip(results.multi_hand_landmarks, results.multi_handedness):
-                                h_landmarks = process_landmarks(hand_landmarks)
-                                # Transform into numpy array
-                                h_landmarks = np.array(h_landmarks)
-
-                                # Transform landmarks to absolute position (coordinates in pixel)
-                                for i in range(len(h_landmarks)):
-                                    h_landmarks[i][0] = h_landmarks[i][0] * w
-                                    h_landmarks[i][1] = h_landmarks[i][1] * h
-
-                                # Transform landmarks to relative position with respect to wrist keypoint (keypoint 0)
-                                for i in range(len(h_landmarks)):
-                                    h_landmarks[i][0] = h_landmarks[i][0] - h_landmarks[0][0]
-                                    h_landmarks[i][1] = h_landmarks[i][1] - h_landmarks[0][1]
-                                    h_landmarks[i][2] = h_landmarks[i][2] - h_landmarks[0][2]
-
-                                # Convert landmarks list into a one-dimensional list of length 63 (21*3)
-                                h_landmarks = np.array(h_landmarks).flatten()
-
-                                # Get max & min values of landmarks list in order to apply normalization
-                                max_value = max(list(map(abs, h_landmarks)))  # Return max value of list
-                                min_value = min(list(map(abs, h_landmarks)))  # Return min value of list
-
-                                # Normalization of landmarks list using linear scaling
-                                h_landmarks = np.array(
-                                    list(map(lambda value: (value - min_value) / (max_value - min_value), h_landmarks)))
-                                # print("np array: ", h_landmarks.shape)
-
+                                h_landmarks = le.process_landmarks(hand_landmarks, image)
                     else:
                         h_landmarks = np.zeros(63)
 

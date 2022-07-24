@@ -9,15 +9,14 @@ import os
 # Define path where to save the gesture keypoints
 PATH = os.path.join('video/gestures_data')
 
-# Define different actions
-actions = np.array(['general', 'hello', 'pick-up', 'stop', 'okay', 'continue', 'next', 'previous', 'hold'])
+# Read gesture classes defined in file CLASSES.txt
+actions = np.array(open("CLASSES.txt").read().splitlines())
 # Number of videos recorded per gesture
 no_sequences = 10
 # Number of frames for each video
 sequence_length = 30
 
 label_map = {label: num for num, label in enumerate(actions)}
-print(label_map)
 
 sequences, labels = [], []
 # For each action inside the actions list, get the number of sequences and loop through each of them in order to
