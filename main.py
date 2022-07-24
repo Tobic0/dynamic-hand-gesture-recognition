@@ -3,7 +3,7 @@ from keras.layers import LSTM, Dense, Dropout
 import numpy as np
 import cv2
 import mediapipe as mp
-import landmarks_extractor as le
+import landmarks_transformer as lt
 
 mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
@@ -54,7 +54,7 @@ def main():
                 # ZIP: takes iterables (can be zero or more), aggregates them in a tuple, and returns it.
                 for hand_landmarks, handedness in zip(results.multi_hand_landmarks, results.multi_handedness):
                     # Transform and normalize hand landmarks
-                    h_landmarks = le.process_landmarks(hand_landmarks, image)
+                    h_landmarks = lt.process_landmarks(hand_landmarks, image)
 
                     # Add last detected landmarks to sequence list and get only last 30 landmarks
                     sequence.insert(0, h_landmarks)

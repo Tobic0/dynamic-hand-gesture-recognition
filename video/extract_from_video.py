@@ -2,7 +2,7 @@ import os
 import cv2
 import numpy as np
 import mediapipe as mp
-import landmarks_extractor as le
+import landmarks_transformer as lt
 
 
 mp_drawing = mp.solutions.drawing_utils
@@ -117,9 +117,6 @@ with mp_hands.Hands(model_complexity=0, max_num_hands=2, min_detection_confidenc
                     image.flags.writeable = True
                     image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
 
-                    h, w, _ = image.shape
-                    h_landmarks = []
-
                     # Check if at least a hand is currently detected
                     if results.multi_hand_landmarks:
                         # Draw hand landmarks
@@ -132,7 +129,7 @@ with mp_hands.Hands(model_complexity=0, max_num_hands=2, min_detection_confidenc
                             # Get all hand landmarks and handedness of detected hands
                             # ZIP: takes iterables (can be zero or more), aggregates them in a tuple, and returns it.
                             for hand_landmarks, handedness in zip(results.multi_hand_landmarks, results.multi_handedness):
-                                h_landmarks = le.process_landmarks(hand_landmarks, image)
+                                h_landmarks = lt.process_landmarks(hand_landmarks, image)
                     else:
                         h_landmarks = np.zeros(63)
 
