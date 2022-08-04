@@ -1,5 +1,3 @@
-from keras.models import Sequential
-from keras.layers import LSTM, Dense, Dropout
 from tensorflow import keras
 import numpy as np
 import cv2
@@ -59,23 +57,30 @@ def main():
 
                     # Check if sequence length is 30, as classification is trained on 30 frames
                     if len(sequence) == 30:
-                        res = model.predict(np.expand_dims(sequence, axis=0))[0]
+                        # Count how many zeros arrays are contained in sequence
+                        count = 0
+                        for s in sequence:
+                            if np.count_nonzero(s) == 0:
+                                count += 1
+                        # If there are more than _ zero arrays don't predict, as the prediction might not be accurate
+                        if count < 10:
+                            res = model.predict(np.expand_dims(sequence, axis=0))[0]
 
-                        if (res[np.argmax(res)] > threshold) & (actions[np.argmax(res)] != "general"):
-                            # Check if sentence has at least one action predicted, if the current action is not the same
-                            # as the last action, append it, otherwise just append
-                            if len(sentence) > 0:
-                                if actions[np.argmax(res)] != sentence[-1]:
+                            if (res[np.argmax(res)] > threshold) & (actions[np.argmax(res)] != "general"):
+                                # Check if sentence has at least one action predicted, if the current action is not
+                                # the same as the last action, append it, otherwise just append
+                                if len(sentence) > 0:
+                                    if actions[np.argmax(res)] != sentence[-1]:
+                                        sentence.append(actions[np.argmax(res)])
+                                else:
                                     sentence.append(actions[np.argmax(res)])
-                            else:
-                                sentence.append(actions[np.argmax(res)])
 
-                            # Print prediction for each class for current sequence of landmarks
-                            print("threshold: ", res, " -> ", actions[np.argmax(res)])
+                                # Print prediction for each class for current sequence of landmarks
+                                # print("threshold: ", res, " -> ", actions[np.argmax(res)])
 
-                        # Reduce the sentence length always to 5
-                        if len(sentence) > 5:
-                            sentence = sentence[-5:]
+                            # Reduce the sentence length always to 5
+                            if len(sentence) > 5:
+                                sentence = sentence[-5:]
 
                     # print("sentence: ", sentence)
                     # Print on screen the current sentence
