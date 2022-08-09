@@ -1,5 +1,4 @@
 general
-hello
 pick-up
 stop
 okay
