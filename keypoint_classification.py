@@ -22,10 +22,10 @@ sequences, labels = [], []
 
 # For each action inside the actions list, get the number of sequences and loop through each of them in order to
 for action in actions:
-    for sequence in range(len(os.listdir(PATH+"/"+action))):
+    for sequence in os.listdir(PATH+"/"+action):
         window = []
-        for frame in range(len(os.listdir(PATH + "/" + action + "/" + str(sequence)))):
-            res = np.load(os.path.join(PATH, action, str(sequence), '{}.npy'.format(frame)))
+        for frame in range(len(os.listdir(PATH + "/" + action + "/" + sequence))):
+            res = np.load(os.path.join(PATH, action, sequence, '{}.npy'.format(frame)))
             window.append(res)
         sequences.append(window)
         labels.append(label_map[action])
@@ -48,7 +48,7 @@ model.add(Dense(actions.shape[0], activation='softmax'))
 model.summary()
 
 model.compile(optimizer='Adam', loss='categorical_crossentropy', metrics=['categorical_accuracy'])
-history = model.fit(X_train, y_train, epochs=550, callbacks=[tb_callback])
+history = model.fit(X_train, y_train, epochs=250, callbacks=[tb_callback])
 print(history.history.keys())
 
 # Save model weights
