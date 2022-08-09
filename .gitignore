@@ -153,3 +153,5 @@ cython_debug/
 
 # Added by me
 /Logs
+/video/video_frames/augmented
+/video/video_frames/raw
