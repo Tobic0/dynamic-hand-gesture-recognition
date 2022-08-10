@@ -1,0 +1,87 @@
+\hypertarget{namespacevideo__recorder}{}\doxysection{video\+\_\+recorder Namespace Reference}
+\label{namespacevideo__recorder}\index{video\_recorder@{video\_recorder}}
+
+
+Documentation for video recorder application.  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespacevideo__recorder_a9f69e3b1eebf6409f454010dff5084ac}{draw\+\_\+options}} (\+\_\+image, op=0)
+\begin{DoxyCompactList}\small\item\em Function to draw on a opencv image the options menu for selecting the hand gesture to record. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacevideo__recorder_a9460f1f5b2b2179066d27803a0edf36d}{select\+\_\+options}} (\+\_\+key, \+\_\+opt)
+\begin{DoxyCompactList}\small\item\em Function for selecting the option from list by pressing on keyboard. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{namespacevideo__recorder_a70c780f5fd6a4e7b7706657d85349e04}\label{namespacevideo__recorder_a70c780f5fd6a4e7b7706657d85349e04}} 
+{\bfseries PATH} = os.\+path.\+join(\textquotesingle{}video\+\_\+frames/raw\textquotesingle{})
+\begin{DoxyCompactList}\small\item\em Path location of folder containing video output. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespacevideo__recorder_affe7dcb02adcd265bd4da13b082823f6}\label{namespacevideo__recorder_affe7dcb02adcd265bd4da13b082823f6}} 
+{\bfseries actions} = np.\+array(open(\char`\"{}../CLASSES.\+txt\char`\"{}).read().splitlines())
+\begin{DoxyCompactList}\small\item\em Read gesture classes defined in file CLASSES.\+txt. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespacevideo__recorder_a1ec8b02d564f1dd7432f43fa6ff3db2f}\label{namespacevideo__recorder_a1ec8b02d564f1dd7432f43fa6ff3db2f}} 
+int {\bfseries no\+\_\+sequences} = 10
+\begin{DoxyCompactList}\small\item\em Number of videos recorded per gesture. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespacevideo__recorder_ae6f6edd8ef07175f4caa509343e1488b}\label{namespacevideo__recorder_ae6f6edd8ef07175f4caa509343e1488b}} 
+int {\bfseries sequence\+\_\+length} = 30
+\begin{DoxyCompactList}\small\item\em Number of frames for each video. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespacevideo__recorder_a7aa496e294fa8d6ce3833bbf2f0f2a7c}\label{namespacevideo__recorder_a7aa496e294fa8d6ce3833bbf2f0f2a7c}} 
+bool {\bfseries recording} = False
+\begin{DoxyCompactList}\small\item\em Boolean to check if currently a video is been recorder. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespacevideo__recorder_a0da562d082c47d22ce36dd2bbe1d18eb}\label{namespacevideo__recorder_a0da562d082c47d22ce36dd2bbe1d18eb}} 
+int {\bfseries opt} = 0
+\begin{DoxyCompactList}\small\item\em Current option type selected. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespacevideo__recorder_a168e5b660e1c2eedc3477d72b1e3462e}\label{namespacevideo__recorder_a168e5b660e1c2eedc3477d72b1e3462e}} 
+{\bfseries cap} = cv2.\+Video\+Capture(0)
+\begin{DoxyCompactList}\small\item\em Capture webcam (0) or camera (1+) using opencv videocapture. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespacevideo__recorder_aabfd7d9ad96cdc61d85c35cbb203a020}\label{namespacevideo__recorder_aabfd7d9ad96cdc61d85c35cbb203a020}} 
+{\bfseries key} = cv2.\+wait\+Key(10)
+\begin{DoxyCompactList}\small\item\em Contains key pressed. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespacevideo__recorder_a257158bb97a048cba44dcf9073ba111d}\label{namespacevideo__recorder_a257158bb97a048cba44dcf9073ba111d}} 
+{\bfseries success}
+\begin{DoxyCompactList}\small\item\em Return success status of cap.\+read() \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespacevideo__recorder_acd0337d63419728317d1b7d35f25b4d6}\label{namespacevideo__recorder_acd0337d63419728317d1b7d35f25b4d6}} 
+{\bfseries image} = cv2.\+flip(image, 1)
+\begin{DoxyCompactList}\small\item\em Contains flipped image aquired from webcam or camera. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Documentation for video recorder application. 
+
+~\newline
+ This code is used for creating a menu overlay for permitting the user to choose which hand gesture to record and once choosed, it records no\+\_\+sequence of times a video for that particular gesture and saves them inside video/video\+\_\+frames/raw folder 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacevideo__recorder_a9f69e3b1eebf6409f454010dff5084ac}\label{namespacevideo__recorder_a9f69e3b1eebf6409f454010dff5084ac}} 
+\index{video\_recorder@{video\_recorder}!draw\_options@{draw\_options}}
+\index{draw\_options@{draw\_options}!video\_recorder@{video\_recorder}}
+\doxysubsubsection{\texorpdfstring{draw\_options()}{draw\_options()}}
+{\footnotesize\ttfamily def video\+\_\+recorder.\+draw\+\_\+options (\begin{DoxyParamCaption}\item[{}]{\+\_\+image,  }\item[{}]{op = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Function to draw on a opencv image the options menu for selecting the hand gesture to record. 
+
+
+\begin{DoxyItemize}
+\item \+\_\+image\+: where to output the menu text
+\item op\+: if 0 load starting menu, if \texorpdfstring{$>$}{>} 0 but lower than the number of actions, load menu for specified action 
+\end{DoxyItemize}\mbox{\Hypertarget{namespacevideo__recorder_a9460f1f5b2b2179066d27803a0edf36d}\label{namespacevideo__recorder_a9460f1f5b2b2179066d27803a0edf36d}} 
+\index{video\_recorder@{video\_recorder}!select\_options@{select\_options}}
+\index{select\_options@{select\_options}!video\_recorder@{video\_recorder}}
+\doxysubsubsection{\texorpdfstring{select\_options()}{select\_options()}}
+{\footnotesize\ttfamily def video\+\_\+recorder.\+select\+\_\+options (\begin{DoxyParamCaption}\item[{}]{\+\_\+key,  }\item[{}]{\+\_\+opt }\end{DoxyParamCaption})}
+
+
+
+Function for selecting the option from list by pressing on keyboard. 
+
+
+\begin{DoxyItemize}
+\item \+\_\+key\+: is the keyboard key pressed by the user
+\item \+\_\+opt\+: is the option selected by the user, by default 0 ~\newline
+~\newline
+ Returns a new option, from 0 to actions.\+size or space key if \+\_\+opt is greater than 0, thus setting recording boolean to true 
+\end{DoxyItemize}

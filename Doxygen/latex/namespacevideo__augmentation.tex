@@ -1,0 +1,83 @@
+\hypertarget{namespacevideo__augmentation}{}\doxysection{video\+\_\+augmentation Namespace Reference}
+\label{namespacevideo__augmentation}\index{video\_augmentation@{video\_augmentation}}
+
+
+Documentation for video augmentation application.  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespacevideo__augmentation_a961df8d74a0920d585e6d7b666cc289c}{random\+\_\+rotate}} (min\+\_\+rotation=-\/15, max\+\_\+rotation=15, step\+\_\+rotation=5)
+\begin{DoxyCompactList}\small\item\em Function for generating random rotation, by default, between -\/15 and 15 degrees with a step rotation of 5 degree. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacevideo__augmentation_a169105d7ce8b93ce40a7a79a5d61b7ca}{random\+\_\+brightness}} (min\+\_\+brightness=1, max\+\_\+brightness=180, step\+\_\+brightness=10)
+\begin{DoxyCompactList}\small\item\em Function for generating random brightness values, by default, between 1 and 180 with a step of 10. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespacevideo__augmentation_a5cf8c0e8b6b5e56b27cf091170475c45}\label{namespacevideo__augmentation_a5cf8c0e8b6b5e56b27cf091170475c45}} 
+def {\bfseries augment\+\_\+video} ()
+\begin{DoxyCompactList}\small\item\em Main function of \mbox{\hyperlink{namespacevideo__augmentation}{video\+\_\+augmentation}} which iterates over all prerecorded videos found in PATH\+\_\+\+VIDEO\+\_\+\+RAW, extract each frame and applies augmentation by generating copies of the original frames but with random brightness and rotation applied. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{namespacevideo__augmentation_a41b71c27041ca5e8b47268bd0150b6b6}\label{namespacevideo__augmentation_a41b71c27041ca5e8b47268bd0150b6b6}} 
+{\bfseries PATH} = os.\+path.\+join(\textquotesingle{}video\+\_\+frames/augmented\textquotesingle{})
+\begin{DoxyCompactList}\small\item\em Path of folder location to save augmented videos. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespacevideo__augmentation_a1e30116a90ffe2f856a432a2540ab93d}\label{namespacevideo__augmentation_a1e30116a90ffe2f856a432a2540ab93d}} 
+{\bfseries PATH\+\_\+\+VIDEO\+\_\+\+RAW} = os.\+path.\+join(\textquotesingle{}video\+\_\+frames/raw\textquotesingle{})
+\begin{DoxyCompactList}\small\item\em Path of folder containing the raw videos recorder with \mbox{\hyperlink{namespacevideo__recorder}{video\+\_\+recorder}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespacevideo__augmentation_a13c23111a9819c843a33f59771057328}\label{namespacevideo__augmentation_a13c23111a9819c843a33f59771057328}} 
+{\bfseries actions} = np.\+array(open(\char`\"{}../CLASSES.\+txt\char`\"{}).read().splitlines())
+\begin{DoxyCompactList}\small\item\em Read gesture classes defined in file CLASSES.\+txt. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespacevideo__augmentation_ac4ec5758792c2a4c7085832dd40c9ae6}\label{namespacevideo__augmentation_ac4ec5758792c2a4c7085832dd40c9ae6}} 
+int {\bfseries no\+\_\+sequences} = 10
+\begin{DoxyCompactList}\small\item\em Number of videos recorded per gesture. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespacevideo__augmentation_a2cc09b46225250b89ccc0741b25e16d0}\label{namespacevideo__augmentation_a2cc09b46225250b89ccc0741b25e16d0}} 
+int {\bfseries sequence\+\_\+length} = 30
+\begin{DoxyCompactList}\small\item\em Number of frames for each video. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespacevideo__augmentation_a73a3da32d762e8c265402585deac998e}\label{namespacevideo__augmentation_a73a3da32d762e8c265402585deac998e}} 
+int {\bfseries no\+\_\+augmentation} = 4
+\begin{DoxyCompactList}\small\item\em Number of augmentation to apply to each video. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Documentation for video augmentation application. 
+
+~\newline
+ This code is used for generating new modified videos from an original video (video augmentation) that were recorder with the \mbox{\hyperlink{namespacevideo__recorder}{video\+\_\+recorder}} or with external tools and put inside the PATH\+\_\+\+VIDEO\+\_\+\+RAW folder. ~\newline
+ In particular this program generates no\+\_\+augmentation of videos by modifying the brightness and applying random rotation to copies of the original frames collection. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacevideo__augmentation_a169105d7ce8b93ce40a7a79a5d61b7ca}\label{namespacevideo__augmentation_a169105d7ce8b93ce40a7a79a5d61b7ca}} 
+\index{video\_augmentation@{video\_augmentation}!random\_brightness@{random\_brightness}}
+\index{random\_brightness@{random\_brightness}!video\_augmentation@{video\_augmentation}}
+\doxysubsubsection{\texorpdfstring{random\_brightness()}{random\_brightness()}}
+{\footnotesize\ttfamily def video\+\_\+augmentation.\+random\+\_\+brightness (\begin{DoxyParamCaption}\item[{}]{min\+\_\+brightness = {\ttfamily 1},  }\item[{}]{max\+\_\+brightness = {\ttfamily 180},  }\item[{}]{step\+\_\+brightness = {\ttfamily 10} }\end{DoxyParamCaption})}
+
+
+
+Function for generating random brightness values, by default, between 1 and 180 with a step of 10. 
+
+
+\begin{DoxyItemize}
+\item min\+\_\+brightness\+: integer for specifying the starting position
+\item max\+\_\+brightness\+: integer for specifying the ending position
+\item step\+\_\+brightness\+: optional integer for indicating the increment ~\newline
+~\newline
+ returns a random value between min\+\_\+brightness and max\+\_\+brightness divided by 100 in order to get a float value between 0 and 1 
+\end{DoxyItemize}\mbox{\Hypertarget{namespacevideo__augmentation_a961df8d74a0920d585e6d7b666cc289c}\label{namespacevideo__augmentation_a961df8d74a0920d585e6d7b666cc289c}} 
+\index{video\_augmentation@{video\_augmentation}!random\_rotate@{random\_rotate}}
+\index{random\_rotate@{random\_rotate}!video\_augmentation@{video\_augmentation}}
+\doxysubsubsection{\texorpdfstring{random\_rotate()}{random\_rotate()}}
+{\footnotesize\ttfamily def video\+\_\+augmentation.\+random\+\_\+rotate (\begin{DoxyParamCaption}\item[{}]{min\+\_\+rotation = {\ttfamily -\/15},  }\item[{}]{max\+\_\+rotation = {\ttfamily 15},  }\item[{}]{step\+\_\+rotation = {\ttfamily 5} }\end{DoxyParamCaption})}
+
+
+
+Function for generating random rotation, by default, between -\/15 and 15 degrees with a step rotation of 5 degree. 
+
+
+\begin{DoxyItemize}
+\item min\+\_\+rotation\+: integer for specifying the starting position
+\item max\+\_\+rotation\+: integer for specifying the ending position
+\item step\+\_\+rotation\+: optional integer for indicating the increment ~\newline
+~\newline
+ returns a random value between min\+\_\+rotation and max\+\_\+rotation 
+\end{DoxyItemize}

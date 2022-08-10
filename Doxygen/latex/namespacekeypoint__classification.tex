@@ -1,0 +1,86 @@
+\hypertarget{namespacekeypoint__classification}{}\doxysection{keypoint\+\_\+classification Namespace Reference}
+\label{namespacekeypoint__classification}\index{keypoint\_classification@{keypoint\_classification}}
+
+
+Documentation for the RNN structure and training.  
+
+
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{namespacekeypoint__classification_af7541b1eb159786e2e0e1012146d8762}\label{namespacekeypoint__classification_af7541b1eb159786e2e0e1012146d8762}} 
+{\bfseries PATH} = os.\+path.\+join(\textquotesingle{}video/gestures\+\_\+data\textquotesingle{})
+\begin{DoxyCompactList}\small\item\em Define path where to save the gesture keypoints. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespacekeypoint__classification_a5000494b4b18c1e888f68bb3e8fe447b}\label{namespacekeypoint__classification_a5000494b4b18c1e888f68bb3e8fe447b}} 
+{\bfseries actions} = np.\+array(open(\char`\"{}CLASSES.\+txt\char`\"{}).read().splitlines())
+\begin{DoxyCompactList}\small\item\em Read gesture classes defined in file CLASSES.\+txt. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespacekeypoint__classification_a8e297da55044bfbf83c976798890c3b0}\label{namespacekeypoint__classification_a8e297da55044bfbf83c976798890c3b0}} 
+int {\bfseries no\+\_\+sequences} = 10
+\begin{DoxyCompactList}\small\item\em Number of videos recorded per gesture. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespacekeypoint__classification_a8b212efa68d07c76c2438ba9bd5153f8}\label{namespacekeypoint__classification_a8b212efa68d07c76c2438ba9bd5153f8}} 
+int {\bfseries sequence\+\_\+length} = 30
+\begin{DoxyCompactList}\small\item\em Number of frames for each video. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespacekeypoint__classification_a0ed00ec425759eb250948240ca89fa1d}\label{namespacekeypoint__classification_a0ed00ec425759eb250948240ca89fa1d}} 
+dictionary {\bfseries label\+\_\+map} = \{label\+: num for num, label in enumerate(\mbox{\hyperlink{namespacekeypoint__classification_a5000494b4b18c1e888f68bb3e8fe447b}{actions}})\}
+\begin{DoxyCompactList}\small\item\em Dictionary containing labels. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespacekeypoint__classification_a9b1cee93b1ae1ffd6cd03cbcb77870de}\label{namespacekeypoint__classification_a9b1cee93b1ae1ffd6cd03cbcb77870de}} 
+{\bfseries sequences}
+\begin{DoxyCompactList}\small\item\em Declaration of sequences and labels lists. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespacekeypoint__classification_a1f8364e13fe242e6d5fd59d0fca0b4c7}\label{namespacekeypoint__classification_a1f8364e13fe242e6d5fd59d0fca0b4c7}} 
+{\bfseries labels}
+\item 
+\mbox{\Hypertarget{namespacekeypoint__classification_a04f77c4aaeb0d260fddaf3d797c96c85}\label{namespacekeypoint__classification_a04f77c4aaeb0d260fddaf3d797c96c85}} 
+list {\bfseries window} = \mbox{[}$\,$\mbox{]}
+\begin{DoxyCompactList}\small\item\em Vector that contains the collection of 30 frames which define a gesture. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespacekeypoint__classification_ad3cf34a899c83a8379bf6526284d2c90}\label{namespacekeypoint__classification_ad3cf34a899c83a8379bf6526284d2c90}} 
+{\bfseries res} = np.\+load(os.\+path.\+join(\mbox{\hyperlink{namespacekeypoint__classification_af7541b1eb159786e2e0e1012146d8762}{PATH}}, action, sequence, \textquotesingle{}\{\}.npy\textquotesingle{}.format(frame)))
+\item 
+\mbox{\Hypertarget{namespacekeypoint__classification_a2620f665234a8bd574f4f38543283f3c}\label{namespacekeypoint__classification_a2620f665234a8bd574f4f38543283f3c}} 
+{\bfseries X} = np.\+array(\mbox{\hyperlink{namespacekeypoint__classification_a9b1cee93b1ae1ffd6cd03cbcb77870de}{sequences}})
+\begin{DoxyCompactList}\small\item\em Extraction of all vectors containing the data of each hand. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespacekeypoint__classification_a61e7b164ef32a172ed476808f41dde64}\label{namespacekeypoint__classification_a61e7b164ef32a172ed476808f41dde64}} 
+{\bfseries y} = to\+\_\+categorical(labels).astype(int)
+\begin{DoxyCompactList}\small\item\em List containing all the labels associated to all input vectors. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespacekeypoint__classification_a84009eafc4d291b109670adec828a60c}\label{namespacekeypoint__classification_a84009eafc4d291b109670adec828a60c}} 
+{\bfseries X\+\_\+train}
+\begin{DoxyCompactList}\small\item\em Splitting the data into train and test sets. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespacekeypoint__classification_ab2dd130d06d674e0e0e58f8252deed13}\label{namespacekeypoint__classification_ab2dd130d06d674e0e0e58f8252deed13}} 
+{\bfseries X\+\_\+test}
+\item 
+\mbox{\Hypertarget{namespacekeypoint__classification_a88f5dd58d5f8755bc09a8b1127365620}\label{namespacekeypoint__classification_a88f5dd58d5f8755bc09a8b1127365620}} 
+{\bfseries y\+\_\+train}
+\item 
+\mbox{\Hypertarget{namespacekeypoint__classification_a1e6b0af89cfd83588598f51e24334294}\label{namespacekeypoint__classification_a1e6b0af89cfd83588598f51e24334294}} 
+{\bfseries y\+\_\+test}
+\item 
+\mbox{\Hypertarget{namespacekeypoint__classification_a0fe1f5e54cf5ea5a9c77a91e9e300d63}\label{namespacekeypoint__classification_a0fe1f5e54cf5ea5a9c77a91e9e300d63}} 
+{\bfseries train\+\_\+size}
+\item 
+\mbox{\Hypertarget{namespacekeypoint__classification_ac132b30030ecea850e550f96a9c9d079}\label{namespacekeypoint__classification_ac132b30030ecea850e550f96a9c9d079}} 
+{\bfseries log\+\_\+dir} = os.\+path.\+join(\textquotesingle{}Logs\textquotesingle{})
+\begin{DoxyCompactList}\small\item\em Definition of the log folder for tensorboard. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespacekeypoint__classification_ab6eacf3a88b51a65facf4edb9f192b79}\label{namespacekeypoint__classification_ab6eacf3a88b51a65facf4edb9f192b79}} 
+{\bfseries tb\+\_\+callback} = Tensor\+Board(\mbox{\hyperlink{namespacekeypoint__classification_ac132b30030ecea850e550f96a9c9d079}{log\+\_\+dir}}=\mbox{\hyperlink{namespacekeypoint__classification_ac132b30030ecea850e550f96a9c9d079}{log\+\_\+dir}})
+\item 
+\mbox{\Hypertarget{namespacekeypoint__classification_a8c63139801f7ad6b9b6739a81a9a2ffa}\label{namespacekeypoint__classification_a8c63139801f7ad6b9b6739a81a9a2ffa}} 
+{\bfseries model} = Sequential()
+\begin{DoxyCompactList}\small\item\em Definition of type of Keras model. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespacekeypoint__classification_a875f4d530cfbe8b7659ebcbafb56493d}\label{namespacekeypoint__classification_a875f4d530cfbe8b7659ebcbafb56493d}} 
+{\bfseries optimizer}
+\item 
+\mbox{\Hypertarget{namespacekeypoint__classification_a29ad94dec1e537e6f60af96804581c3a}\label{namespacekeypoint__classification_a29ad94dec1e537e6f60af96804581c3a}} 
+{\bfseries loss}
+\item 
+\mbox{\Hypertarget{namespacekeypoint__classification_a425872b680bc4f41d13235743f7ce6d9}\label{namespacekeypoint__classification_a425872b680bc4f41d13235743f7ce6d9}} 
+{\bfseries metrics}
+\item 
+\mbox{\Hypertarget{namespacekeypoint__classification_a4edd853ddd608c6f444ac9a734f07ea3}\label{namespacekeypoint__classification_a4edd853ddd608c6f444ac9a734f07ea3}} 
+{\bfseries history} = model.\+fit(\mbox{\hyperlink{namespacekeypoint__classification_a84009eafc4d291b109670adec828a60c}{X\+\_\+train}}, y\+\_\+train, epochs=250, callbacks=\mbox{[}tb\+\_\+callback\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Documentation for the RNN structure and training. 
+
+~\newline
+ This code is used to define the recurrent neural network and to train it on the input data extracted with \mbox{\hyperlink{namespaceextract__from__video}{extract\+\_\+from\+\_\+video}} 

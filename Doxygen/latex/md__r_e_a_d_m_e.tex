@@ -1,0 +1,117 @@
+tensorboard --logdir=test \hypertarget{md__r_e_a_d_m_e_autotoc_md0}{}\doxysection{Hand-\/\+Gesture-\/\+Recognition}\label{md__r_e_a_d_m_e_autotoc_md0}
+Hand gesture recognition project based on Google\textquotesingle{}s mediapipe library for hand and finger tracking, and the application of a feedforward neural network for classifying hand gestures.\hypertarget{md__r_e_a_d_m_e_autotoc_md1}{}\doxysubsection{Index}\label{md__r_e_a_d_m_e_autotoc_md1}
+
+\begin{DoxyEnumerate}
+\item Introduction
+\item Requirements
+\item Usage
+\item Basic working flow
+\item Training
+\item References
+\end{DoxyEnumerate}\hypertarget{md__r_e_a_d_m_e_autotoc_md2}{}\doxysubsection{Introduction}\label{md__r_e_a_d_m_e_autotoc_md2}
+The main goal of this project is to be able to classify different hand gestures that can later be used to control an ur5 robotic arm, for example interrupt the arm movement if a stop gesture is recognized. The recognition process is achieved through Google\textquotesingle{}s mediapipe hands solution for hand keypoint detection and a feedforward neural network or multilayer perceptron for classifying the gestures.\hypertarget{md__r_e_a_d_m_e_autotoc_md3}{}\doxysubsection{Requirements}\label{md__r_e_a_d_m_e_autotoc_md3}
+
+\begin{DoxyItemize}
+\item matplotlib 3.\+5.\+1
+\item mediapipe 0.\+8.\+9.\+1
+\item opencv 4.\+5.\+5.\+64
+\item scikit-\/learn 1.\+0.\+2
+\item seaborn 0.\+11.\+2
+\item tensorflow 2.\+8.\+0
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md4}{}\doxysubsection{Usage}\label{md__r_e_a_d_m_e_autotoc_md4}
+To execute the code you need to have a webcam connected and just need to run the following command\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{python3 main.py}
+
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md5}{}\doxysubsection{Basic working flow}\label{md__r_e_a_d_m_e_autotoc_md5}
+The basic working idea is that mediapipe generates 21 3D landmarks on current detected hands in a webcam and extracts each landmarks x and y value (each one going from 0.\+0 to 1.\+0)\+:
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{8}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 0   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 1   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 2   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 3   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ ....   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 18   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 19   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 20    }\\\cline{1-8}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 0   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 1   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 2   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 3   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ ....   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 18   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 19   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 20    }\\\cline{1-8}
+\endhead
+\mbox{[}0.\+81, 0.\+82\mbox{]}   &\mbox{[}0.\+71, 0.\+76\mbox{]}   &\mbox{[}0.\+63, 0.\+65\mbox{]}   &\mbox{[}0.\+59, 0.\+55\mbox{]}   &....   &\mbox{[}0.\+91, 0.\+40\mbox{]}   &\mbox{[}0.\+92, 0.\+34\mbox{]}   &\mbox{[}0.\+93, 0.\+27\mbox{]}   \\\cline{1-8}
+\end{longtabu}
+
+
+ 
+
+The x and y values are then multiplied, respectively, by the frame width and frame height in order to get pixel coordinates for each keypoint.
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{8}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 0   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 1   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 2   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 3   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ ....   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 18   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 19   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 20    }\\\cline{1-8}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 0   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 1   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 2   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 3   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ ....   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 18   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 19   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 20    }\\\cline{1-8}
+\endhead
+\mbox{[}521.\+86, 394.\+18\mbox{]}   &\mbox{[}454.\+98, 366.\+42\mbox{]}   &\mbox{[}406.\+18, 312.\+48\mbox{]}   &\mbox{[}376.\+36, 262.\+41\mbox{]}   &....   &\mbox{[}581.\+03, 193.\+41\mbox{]}   &\mbox{[}588.\+94, 161.\+57\mbox{]}   &\mbox{[}593.\+04, 129.\+48\mbox{]}   \\\cline{1-8}
+\end{longtabu}
+
+
+After that the landmarks are transformed to relative position with respect to the wrist keypoint (keypoint 0), so that the hand landmarks are not relative to the current position of the hand in the captured frame.
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{8}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 0   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 1   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 2   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 3   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ ....   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 18   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 19   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 20    }\\\cline{1-8}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 0   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 1   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 2   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 3   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ ....   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 18   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 19   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 20    }\\\cline{1-8}
+\endhead
+\mbox{[}0.\+0, 0.\+0\mbox{]}   &\mbox{[}-\/66.\+87, -\/27.\+76\mbox{]}   &\mbox{[}-\/115.\+68, 81.\+69\mbox{]}   &\mbox{[}-\/145.\+50, -\/131.\+76\mbox{]}   &....   &\mbox{[}59.\+17, 200.\+77\mbox{]}   &\mbox{[}67.\+08, -\/232.\+61\mbox{]}   &\mbox{[}71.\+18, 264.\+70\mbox{]}   \\\cline{1-8}
+\end{longtabu}
+
+
+Then convert the list into a one-\/dimensional list.
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{1}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ One dimensional list    }\\\cline{1-1}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ One dimensional list    }\\\cline{1-1}
+\endhead
+0.\+0, 0.\+0, -\/66.\+87, -\/27.\+76, -\/115.\+68, 81.\+69, -\/145.\+50, -\/131.\+76, .... , 59.\+17, 200.\+77, 67.\+08, -\/232.\+61, 71.\+18, 264.\+70   \\\cline{1-1}
+\end{longtabu}
+
+
+Get max \& min values of landmarks list in order to apply min-\/max normalization method.
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{1}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Normalzied one dimensional list    }\\\cline{1-1}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Normalzied one dimensional list    }\\\cline{1-1}
+\endhead
+0.\+0, 0.\+0, -\/0.\+20, -\/0.\+08, -\/0.\+35, 0.\+25, -\/0.\+44, -\/0.\+39, ...., 0.\+18, -\/0.\+61, 0.\+20, -\/0.\+70, 0.\+21, -\/0.\+80   \\\cline{1-1}
+\end{longtabu}
+
+
+At this point, based on the weights gained during the training phase, it prints the current detected class.\hypertarget{md__r_e_a_d_m_e_autotoc_md6}{}\doxysubsection{Training}\label{md__r_e_a_d_m_e_autotoc_md6}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md7}{}\doxysubsection{References}\label{md__r_e_a_d_m_e_autotoc_md7}
+
+\begin{DoxyItemize}
+\item \href{https://github.com/google/mediapipe}{\texttt{ Media\+Pipe}}
+\item \href{https://github.com/Kazuhito00/hand-gesture-recognition-using-mediapipe}{\texttt{ Media\+Pipe Hand gesture recognition (by Kazuhito00)}}
+\item \href{https://upcommons.upc.edu/bitstream/handle/2117/343984/ASL\%20recognition\%20in\%20real\%20time\%20with\%20RNN\%20-\%20Antonio\%20Dom\%C3\%A8nech.pdf?sequence=1&isAllowed=y}{\texttt{ Sign language recognition}} 
+\end{DoxyItemize}

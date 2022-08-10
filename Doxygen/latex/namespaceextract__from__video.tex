@@ -1,0 +1,67 @@
+\hypertarget{namespaceextract__from__video}{}\doxysection{extract\+\_\+from\+\_\+video Namespace Reference}
+\label{namespaceextract__from__video}\index{extract\_from\_video@{extract\_from\_video}}
+
+
+Documentation for video landmark extraction.  
+
+
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{namespaceextract__from__video_aa4d239fe0c2ea05635f7fbfb19a5724f}\label{namespaceextract__from__video_aa4d239fe0c2ea05635f7fbfb19a5724f}} 
+{\bfseries mp\+\_\+drawing} = mp.\+solutions.\+drawing\+\_\+utils
+\begin{DoxyCompactList}\small\item\em Media\+Pipe solution drawing utils. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespaceextract__from__video_adffd3a7a508c2a8408d17249c1f3a98f}\label{namespaceextract__from__video_adffd3a7a508c2a8408d17249c1f3a98f}} 
+{\bfseries mp\+\_\+drawing\+\_\+styles} = mp.\+solutions.\+drawing\+\_\+styles
+\begin{DoxyCompactList}\small\item\em Media\+Pipe drawing styles for detected hands. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespaceextract__from__video_a1d1cc42dc25ee13b0b74b9d27924a6f9}\label{namespaceextract__from__video_a1d1cc42dc25ee13b0b74b9d27924a6f9}} 
+{\bfseries mp\+\_\+hands} = mp.\+solutions.\+hands
+\begin{DoxyCompactList}\small\item\em Define which Media\+Pipe solution to use. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespaceextract__from__video_ae9cce30a970fa4a790cd6851c3572d6c}\label{namespaceextract__from__video_ae9cce30a970fa4a790cd6851c3572d6c}} 
+{\bfseries PATH} = os.\+path.\+join(\textquotesingle{}gestures\+\_\+data\textquotesingle{})
+\begin{DoxyCompactList}\small\item\em Papth where to output the hand landmarks. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespaceextract__from__video_ac0d565cace107fe86dbce9f724e7c0ae}\label{namespaceextract__from__video_ac0d565cace107fe86dbce9f724e7c0ae}} 
+{\bfseries PATH\+\_\+\+VIDEO\+\_\+\+AUGMENTED} = os.\+path.\+join(\textquotesingle{}video\+\_\+frames/augmented\textquotesingle{})
+\begin{DoxyCompactList}\small\item\em Path of folder containing the augmented videos used for landmark extraction. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespaceextract__from__video_a632cac91f35c17c165f1387a77484785}\label{namespaceextract__from__video_a632cac91f35c17c165f1387a77484785}} 
+{\bfseries actions} = np.\+array(open(\char`\"{}../CLASSES.\+txt\char`\"{}).read().splitlines())
+\begin{DoxyCompactList}\small\item\em Read gesture classes defined in file CLASSES.\+txt. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespaceextract__from__video_a3193893e9611feac61fc40609d6a7bb3}\label{namespaceextract__from__video_a3193893e9611feac61fc40609d6a7bb3}} 
+int {\bfseries no\+\_\+sequences} = 10
+\begin{DoxyCompactList}\small\item\em Number of videos recorded per gesture. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespaceextract__from__video_a3c7a02742a9aeaf809c21d36d5daa1e8}\label{namespaceextract__from__video_a3c7a02742a9aeaf809c21d36d5daa1e8}} 
+int {\bfseries sequence\+\_\+length} = 30
+\begin{DoxyCompactList}\small\item\em Number of frames for each video. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespaceextract__from__video_abe329d81ab3cbd504b3015dba86fb47e}\label{namespaceextract__from__video_abe329d81ab3cbd504b3015dba86fb47e}} 
+{\bfseries model\+\_\+complexity}
+\item 
+\mbox{\Hypertarget{namespaceextract__from__video_aad272a62326182b6f11ad6a91525f362}\label{namespaceextract__from__video_aad272a62326182b6f11ad6a91525f362}} 
+{\bfseries max\+\_\+num\+\_\+hands}
+\item 
+\mbox{\Hypertarget{namespaceextract__from__video_a6917d7b7befcaf6a184ef13351a4020c}\label{namespaceextract__from__video_a6917d7b7befcaf6a184ef13351a4020c}} 
+{\bfseries min\+\_\+detection\+\_\+confidence}
+\item 
+\mbox{\Hypertarget{namespaceextract__from__video_ad2f238f2388bdf5b7b778c2533fd4348}\label{namespaceextract__from__video_ad2f238f2388bdf5b7b778c2533fd4348}} 
+{\bfseries min\+\_\+tracking\+\_\+confidence}
+\item 
+\mbox{\Hypertarget{namespaceextract__from__video_ab7109c3410a36f6c2d47bbadfbbb0486}\label{namespaceextract__from__video_ab7109c3410a36f6c2d47bbadfbbb0486}} 
+{\bfseries image} = cv2.\+imread(\mbox{\hyperlink{namespaceextract__from__video_ac0d565cace107fe86dbce9f724e7c0ae}{PATH\+\_\+\+VIDEO\+\_\+\+AUGMENTED}} + \char`\"{}/\char`\"{} + act + \char`\"{}/\char`\"{} + sequence + \char`\"{}/\char`\"{} + act + \char`\"{}\+\_\+\char`\"{} + str(frame\+\_\+num) + \char`\"{}.jpg\char`\"{})
+\begin{DoxyCompactList}\small\item\em Read a frame from augmented video. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespaceextract__from__video_abd6e381e8ada403ceb4a1fb0f4fa31c6}\label{namespaceextract__from__video_abd6e381e8ada403ceb4a1fb0f4fa31c6}} 
+{\bfseries results} = hands.\+process(cv2.\+cvt\+Color(\mbox{\hyperlink{namespaceextract__from__video_ab7109c3410a36f6c2d47bbadfbbb0486}{image}}, cv2.\+COLOR\+\_\+\+BGR2\+RGB))
+\begin{DoxyCompactList}\small\item\em Convert the BGR image to RGB before processing. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespaceextract__from__video_ae04dd566ec0f015932e41c19213546ed}\label{namespaceextract__from__video_ae04dd566ec0f015932e41c19213546ed}} 
+{\bfseries writeable}
+\item 
+\mbox{\Hypertarget{namespaceextract__from__video_a98f59bcfdf84ea0e1b737fa7a029f5de}\label{namespaceextract__from__video_a98f59bcfdf84ea0e1b737fa7a029f5de}} 
+{\bfseries h\+\_\+landmarks} = lt.\+process\+\_\+landmarks(hand\+\_\+landmarks, \mbox{\hyperlink{namespaceextract__from__video_ab7109c3410a36f6c2d47bbadfbbb0486}{image}})
+\begin{DoxyCompactList}\small\item\em Get hand landmarks by calling landmarks\+\_\+transformer. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespaceextract__from__video_a7c55cf1803da34862dd92fde2e6265e7}\label{namespaceextract__from__video_a7c55cf1803da34862dd92fde2e6265e7}} 
+{\bfseries npy\+\_\+path} = os.\+path.\+join(\mbox{\hyperlink{namespaceextract__from__video_ae9cce30a970fa4a790cd6851c3572d6c}{PATH}}, act, str(sequence), str(frame\+\_\+num))
+\begin{DoxyCompactList}\small\item\em Save numpy array containg landmarks to PATH location. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Documentation for video landmark extraction. 
+
+This program is used to extract the coordinates of the landmarks generated by Google\textquotesingle{}s Media\+Pipe framework from the augmented videos generated with \mbox{\hyperlink{namespacevideo__augmentation}{video\+\_\+augmentation}}. The data extracted is then saved in PATH location. 
