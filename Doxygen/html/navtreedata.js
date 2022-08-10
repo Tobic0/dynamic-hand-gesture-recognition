@@ -26,17 +26,7 @@ var NAVTREE =
 [
   [ "Dynamic hand gesture recognition system using RNN with LSTM", "index.html", [
     [ "Dynamic hand gesture recognition using RNN with LSTM", "index.html", null ],
-    [ "README", "md__c___users_tobia__desktop_python_dynamic_hand_gesture_recognition__r_e_a_d_m_e.html", [
-      [ "Hand-Gesture-Recognition", "md__c___users_tobia__desktop_python_dynamic_hand_gesture_recognition__r_e_a_d_m_e.html#autotoc_md0", [
-        [ "Index", "md__c___users_tobia__desktop_python_dynamic_hand_gesture_recognition__r_e_a_d_m_e.html#autotoc_md1", null ],
-        [ "Introduction", "md__c___users_tobia__desktop_python_dynamic_hand_gesture_recognition__r_e_a_d_m_e.html#autotoc_md2", null ],
-        [ "Requirements", "md__c___users_tobia__desktop_python_dynamic_hand_gesture_recognition__r_e_a_d_m_e.html#autotoc_md3", null ],
-        [ "Usage", "md__c___users_tobia__desktop_python_dynamic_hand_gesture_recognition__r_e_a_d_m_e.html#autotoc_md4", null ],
-        [ "Basic working flow", "md__c___users_tobia__desktop_python_dynamic_hand_gesture_recognition__r_e_a_d_m_e.html#autotoc_md5", null ],
-        [ "Training", "md__c___users_tobia__desktop_python_dynamic_hand_gesture_recognition__r_e_a_d_m_e.html#autotoc_md6", null ],
-        [ "References", "md__c___users_tobia__desktop_python_dynamic_hand_gesture_recognition__r_e_a_d_m_e.html#autotoc_md7", null ]
-      ] ]
-    ] ],
+    [ "README", "md__c___users_tobia__desktop_python_dynamic_hand_gesture_recognition__r_e_a_d_m_e.html", null ],
     [ "Packages", "namespaces.html", [
       [ "Package List", "namespaces.html", "namespaces_dup" ],
       [ "Package Members", "namespacemembers.html", [

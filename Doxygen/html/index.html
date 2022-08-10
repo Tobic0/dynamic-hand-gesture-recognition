@@ -85,7 +85,18 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
   <div class="headertitle"><div class="title">Dynamic hand gesture recognition using RNN with LSTM </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"></div></div><!-- PageDoc -->
+<div class="textblock"><p >This is the official documentation of the dynamic hand gesture recognition system based on Google's MediaPipe framework and Recurrent Neural Network with Long Short Term Memory project which can be seen at the following GitHub repo: <a href="https://github.com/Tobic0/dynamic-hand-gesture-recognition">https://github.com/Tobic0/dynamic-hand-gesture-recognition</a> <br  />
+<br  />
+ This documentation contains a brief overview of the main code pages used for executing the application:</p><ul>
+<li><a class="el" href="namespacevideo__recorder.html" title="Documentation for video recorder application.">video_recorder</a></li>
+<li><a class="el" href="namespacevideo__augmentation.html" title="Documentation for video augmentation application.">video_augmentation</a></li>
+<li><a class="el" href="namespaceextract__from__video.html" title="Documentation for video landmark extraction.">extract_from_video</a></li>
+<li><a class="el" href="namespacekeypoint__classification.html" title="Documentation for the RNN structure and training.">keypoint_classification</a></li>
+<li>main <br  />
+<br  />
+ In particular the working flow is the following: first you need to record the hand gestures using the <a class="el" href="namespacevideo__recorder.html" title="Documentation for video recorder application.">video_recorder</a> where you can select which gesture to record or using external tools, it is important to record many videos as possible as, the more the better; afterwards using <a class="el" href="namespacevideo__augmentation.html" title="Documentation for video augmentation application.">video_augmentation</a> we increment the number of videos by augmenting the original one by changing randomly the brightness and by adding a random rotation. At this point all the input data is ready for running the <a class="el" href="namespaceextract__from__video.html" title="Documentation for video landmark extraction.">extract_from_video</a> script which uses MediaPipe hands solution for detecting and generating hand landmarks which are then stored in an appropriate folder. Afterwards we can train our recurrent neural network by running the <a class="el" href="namespacekeypoint__classification.html" title="Documentation for the RNN structure and training.">keypoint_classification</a> script which at the end will save the model together with the weights that been computed. At the end it is only necessary to run the main script for a real time application. Specifically the program uses the MediaPipe framework to detect hands, if it does then the landmarks are extracted and using the neural network previously trained it predicts which hand gesture was performed. </li>
+</ul>
+</div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

@@ -1,0 +1,12 @@
+This is the official documentation of the dynamic hand gesture recognition system based on Google\textquotesingle{}s Media\+Pipe framework and Recurrent Neural Network with Long Short Term Memory project which can be seen at the following Git\+Hub repo\+: \href{https://github.com/Tobic0/dynamic-hand-gesture-recognition}{\texttt{ https\+://github.\+com/\+Tobic0/dynamic-\/hand-\/gesture-\/recognition}} ~\newline
+~\newline
+ This documentation contains a brief overview of the main code pages used for executing the application\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{namespacevideo__recorder}{video\+\_\+recorder}}
+\item \mbox{\hyperlink{namespacevideo__augmentation}{video\+\_\+augmentation}}
+\item \mbox{\hyperlink{namespaceextract__from__video}{extract\+\_\+from\+\_\+video}}
+\item \mbox{\hyperlink{namespacekeypoint__classification}{keypoint\+\_\+classification}}
+\item main ~\newline
+~\newline
+ In particular the working flow is the following\+: first you need to record the hand gestures using the \mbox{\hyperlink{namespacevideo__recorder}{video\+\_\+recorder}} where you can select which gesture to record or using external tools, it is important to record many videos as possible as, the more the better; afterwards using \mbox{\hyperlink{namespacevideo__augmentation}{video\+\_\+augmentation}} we increment the number of videos by augmenting the original one by changing randomly the brightness and by adding a random rotation. At this point all the input data is ready for running the \mbox{\hyperlink{namespaceextract__from__video}{extract\+\_\+from\+\_\+video}} script which uses Media\+Pipe hands solution for detecting and generating hand landmarks which are then stored in an appropriate folder. Afterwards we can train our recurrent neural network by running the \mbox{\hyperlink{namespacekeypoint__classification}{keypoint\+\_\+classification}} script which at the end will save the model together with the weights that been computed. At the end it is only necessary to run the main script for a real time application. Specifically the program uses the Media\+Pipe framework to detect hands, if it does then the landmarks are extracted and using the neural network previously trained it predicts which hand gesture was performed. 
+\end{DoxyItemize}

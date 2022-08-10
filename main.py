@@ -1,4 +1,23 @@
 ## \mainpage Dynamic hand gesture recognition using RNN with LSTM
+# This is the official documentation of the dynamic hand gesture recognition system based on Google's MediaPipe
+# framework and Recurrent Neural Network with Long Short Term Memory project which can be seen at the following
+# GitHub repo: https://github.com/Tobic0/dynamic-hand-gesture-recognition \n\n
+# This documentation contains a brief overview of the main code pages used for executing the application:
+# - video_recorder
+# - video_augmentation
+# - extract_from_video
+# - keypoint_classification
+# - main \n\n
+# In particular the working flow is the following: first you need to record the hand gestures using the video_recorder
+# where you can select which gesture to record or using external tools, it is important to record many videos as
+# possible as, the more the better; afterwards using video_augmentation we increment the number of videos by
+# augmenting the original one by changing randomly the brightness and by adding a random rotation. At this point all
+# the input data is ready for running the extract_from_video script which uses MediaPipe hands solution for detecting
+# and generating hand landmarks which are then stored in an appropriate folder. Afterwards we can train our
+# recurrent neural network by running the keypoint_classification script which at the end will save the model
+# together with the weights that been computed. At the end it is only necessary to run the main script for a real
+# time application. Specifically the program uses the MediaPipe framework to detect hands, if it does then the
+# landmarks are extracted and using the neural network previously trained it predicts which hand gesture was performed.
 
 ## @package main
 # Documentation for the real time application code. \n
