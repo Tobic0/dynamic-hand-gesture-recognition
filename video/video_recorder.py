@@ -1,17 +1,24 @@
+## @package video_recorder
+# Documentation for video recorder application. \n
+# This code is used for creating a menu overlay for permitting the user to choose which hand gesture to record and
+# once choosed, it records no_sequence of times a video for that particular gesture and saves them inside
+# video/video_frames/raw folder
 import os
 import cv2
 import numpy as np
 
 
+## Path location of folder containing video output
 PATH = os.path.join('video_frames/raw')
 
-# Read gesture classes defined in file CLASSES.txt
+## Read gesture classes defined in file CLASSES.txt
 actions = np.array(open("../CLASSES.txt").read().splitlines())
-# Number of videos recorded per gesture
+## Number of videos recorded per gesture
 no_sequences = 10
-# Number of frames for each video
+## Number of frames for each video
 sequence_length = 30
 
+## Boolean to check if currently a video is been recorder
 recording = False
 
 for action in actions:
@@ -21,7 +28,9 @@ for action in actions:
         pass
 
 
-# Function to draw on opencv image the options menu
+## Function to draw on a opencv image the options menu for selecting the hand gesture to record
+# - _image: where to output the menu text
+# - op: if 0 load starting menu, if > 0 but lower than the number of actions, load menu for specified action
 def draw_options(_image, op=0):
     if op == 0:
         for a in range(1, actions.size+1):
@@ -40,7 +49,11 @@ def draw_options(_image, op=0):
                     (255, 255, 255), 1)
 
 
-# Function for selecting the option from list by pressing on keyboard
+## Function for selecting the option from list by pressing on keyboard
+# - _key: is the keyboard key pressed by the user
+# - _opt: is the option selected by the user, by default 0 \n\n
+# Returns a new option, from 0 to actions.size or space key if _opt is greater than 0, thus setting recording
+# boolean to true
 def select_options(_key, _opt):
     # 0 = 48, 4 = 51
     if 48 <= _key <= (48 + actions.size):
@@ -55,11 +68,13 @@ def select_options(_key, _opt):
         return _opt
 
 
-# Current option type selected
+## Current option type selected
 opt = 0
+## Capture webcam (0) or camera (1+) using opencv videocapture
 cap = cv2.VideoCapture(0)
 
 while cap.isOpened():
+    ## Contains key pressed
     key = cv2.waitKey(10)
 
     # Wait until ESC key is pressed to close program
@@ -67,7 +82,9 @@ while cap.isOpened():
         break
     opt = select_options(key, opt)
 
+    ## Return success status of cap.read()
     success, image = cap.read()
+    ##Contains flipped image aquired from webcam or camera
     image = cv2.flip(image, 1)
 
     if recording:

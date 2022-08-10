@@ -1,3 +1,10 @@
+## \mainpage Dynamic hand gesture recognition using RNN with LSTM
+
+## @package main
+# Documentation for the real time application code. \n
+# This is the main program which is run for real time application. It tries to open the webcam or camera which is
+# used to detect if there are hands using Google's MediaPipe framework and if hands are detected the RNN model is
+# called to predict the hand gesture that was performed.
 from tensorflow import keras
 import numpy as np
 import cv2
@@ -5,25 +12,35 @@ import mediapipe as mp
 import landmarks_transformer as lt
 import time
 
+# Mediapipe setup variables for indicating type of ML solution
+## MediaPipe solution drawing utils
 mp_drawing = mp.solutions.drawing_utils
+## MediaPipe drawing styles for detected hands
 mp_drawing_styles = mp.solutions.drawing_styles
+## Define which MediaPipe solution to use
 mp_hands = mp.solutions.hands
 
-# Read gesture classes defined in file CLASSES.txt
+## Read gesture classes defined in file CLASSES.txt
 actions = np.array(open("CLASSES.txt").read().splitlines())
-# Number of frames for each video
+## Number of frames for each video
 sequence_length = 30
 
 
+## Main function for real time application
 def main():
     # Load keras classification model in order to predict gesture
     model = keras.models.load_model('gesture.h5')
 
+    # List containing last 30 frames (with or without hands)
     sequence = []
+    # List containing last 5 gestures that were performed
     sentence = []
+    # Threshold value used to determine whether to use or not the predicted class
     threshold = 0.85
 
+    # Open webcam or camera
     cap = cv2.VideoCapture(0)
+    # Start MediaPipe hand solution
     with mp_hands.Hands(model_complexity=0, max_num_hands=1, min_detection_confidence=0.5,
                         min_tracking_confidence=0.5) as hands:
         while cap.isOpened():
@@ -62,7 +79,7 @@ def main():
                         for s in sequence:
                             if np.count_nonzero(s) == 0:
                                 count += 1
-                        # If there are more than _ zero arrays don't predict, as the prediction might not be accurate
+                        # If there are more than 10 zero arrays don't predict, as the prediction might not be accurate
                         if count < 10:
                             res = model.predict(np.expand_dims(sequence, axis=0))[0]
 
@@ -100,7 +117,7 @@ def main():
                 sequence = sequence[:30]
 
             cv2.putText(image, "'ESC' to exit", (5, 20), cv2.FONT_HERSHEY_DUPLEX, 0.6, (0, 0, 0), 1)
-
+            # Show image
             cv2.imshow('Dynamic hand gesture recognition', image)
             # Wait until ESC key os pressed to close program
             if cv2.waitKey(10) & 0xFF == 27:
