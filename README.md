@@ -67,7 +67,3 @@ At this point, based on the weights gained during the training phase, it prints 
 
 ## Training
 
-## References
-* [MediaPipe](https://github.com/google/mediapipe)
-* [MediaPipe Hand gesture recognition (by Kazuhito00)](https://github.com/Kazuhito00/hand-gesture-recognition-using-mediapipe)
-* [Sign language recognition](https://upcommons.upc.edu/bitstream/handle/2117/343984/ASL%20recognition%20in%20real%20time%20with%20RNN%20-%20Antonio%20Dom%C3%A8nech.pdf?sequence=1&isAllowed=y)
