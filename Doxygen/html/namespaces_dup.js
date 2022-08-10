@@ -28,6 +28,9 @@ var namespaces_dup =
       [ "X_train", "namespacekeypoint__classification.html#a84009eafc4d291b109670adec828a60c", null ],
       [ "y", "namespacekeypoint__classification.html#a61e7b164ef32a172ed476808f41dde64", null ]
     ] ],
+    [ "landmarks_transformer", "namespacelandmarks__transformer.html", [
+      [ "process_landmarks", "namespacelandmarks__transformer.html#a9593ea4d3871e062fa062cfaad082e2e", null ]
+    ] ],
     [ "main", "namespacemain.html", [
       [ "main", "namespacemain.html#af613cea4cba4fb7de8e40896b3368945", null ],
       [ "actions", "namespacemain.html#a5292633ee2ea79d2f24d32506dd513c5", null ],
