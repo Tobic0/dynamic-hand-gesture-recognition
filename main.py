@@ -116,9 +116,9 @@ def main():
                                 # Print prediction for each class for current sequence of landmarks
                                 # print("threshold: ", res, " -> ", actions[np.argmax(res)])
 
-                            # Reduce the sentence length always to 5
-                            if len(sentence) > 5:
-                                sentence = sentence[-5:]
+                            # Reduce the sentence length always to 4
+                            if len(sentence) > 4:
+                                sentence = sentence[-4:]
 
                     # print("sentence: ", sentence)
                     # Print on screen the current sentence
