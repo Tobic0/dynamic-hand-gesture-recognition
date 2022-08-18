@@ -39,7 +39,7 @@ def random_rotate(min_rotation=-15, max_rotation=15, step_rotation=5):
 # - step_brightness: optional integer for indicating the increment \n\n
 # returns a random value between min_brightness and max_brightness divided by 100 in order to get a float value between
 # 0 and 1
-def random_brightness(min_brightness=1, max_brightness=180, step_brightness=10):
+def random_brightness(min_brightness=1, max_brightness=170, step_brightness=10):
     return (random.randrange(min_brightness, max_brightness, step_brightness) / 100) + 0.1
 
 
