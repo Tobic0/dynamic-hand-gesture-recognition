@@ -26,6 +26,7 @@
 # This is the main program which is run for real time application. It tries to open the webcam or camera which is
 # used to detect if there are hands using Google's MediaPipe framework and if hands are detected the RNN model is
 # called to predict the hand gesture that was performed.
+import tensorflow as tf
 from tensorflow import keras
 import numpy as np
 import cv2
@@ -43,6 +44,8 @@ mp_hands = mp.solutions.hands
 
 ## Read gesture classes defined in file CLASSES.txt
 actions = np.array(open("CLASSES.txt").read().splitlines())
+## Path where tflite model is saved
+TF_LITE_PATH = 'gesture.tflite'
 ## Number of frames for each video
 sequence_length = 30
 
@@ -52,12 +55,23 @@ def main():
     # Load keras classification model in order to predict gesture
     model = keras.models.load_model('gesture.h5')
 
+    # Load tflite model and allocate tensors
+    interpreter = tf.lite.Interpreter(model_path=TF_LITE_PATH)
+    interpreter.allocate_tensors()
+
+    # Get input and output tensors
+    input_details = interpreter.get_input_details()
+    output_details = interpreter.get_output_details()
+    input_shape = input_details[0]['shape']
+
     # List containing last 30 frames (with or without hands)
     sequence = []
     # List containing last 5 gestures that were performed
     sentence = []
     # Threshold value used to determine whether to use or not the predicted class
     threshold = 0.85
+    # Value used for determine after how many landmarks to predict the next gesture
+    wait_for_landmarks = 0
 
     # Open webcam or camera
     cap = cv2.VideoCapture(0)
@@ -92,6 +106,8 @@ def main():
                     # Add last detected landmarks to sequence list and get only last 30 landmarks
                     sequence.insert(0, h_landmarks)
                     sequence = sequence[:30]
+                    # Increment by 1 each time a new landmark has been added to sequence
+                    wait_for_landmarks += 1
 
                     # Check if sequence length is 30, as classification is trained on 30 frames
                     if len(sequence) == 30:
@@ -101,10 +117,16 @@ def main():
                             if np.count_nonzero(s) == 0:
                                 count += 1
                         # If there are more than 10 zero arrays don't predict, as the prediction might not be accurate
-                        if count < 10:
-                            res = model.predict(np.expand_dims(sequence, axis=0))[0]
+                        if (count < 10) & (wait_for_landmarks > 20):
+                            # res = model.predict(np.expand_dims(sequence, axis=0))[0]
+                            input_data = np.expand_dims(np.array(sequence, dtype=np.float32), axis=0)
+                            interpreter.set_tensor(input_details[0]['index'], input_data)
+                            interpreter.invoke()
+                            res = interpreter.get_tensor(output_details[0]['index'])
+                            # Reset to 0 when prediction gets called
+                            wait_for_landmarks = 0
 
-                            if (res[np.argmax(res)] > threshold) & (actions[np.argmax(res)] != "general"):
+                            if (np.argmax(res) > threshold) & (actions[np.argmax(res)] != "general"):
                                 # Check if sentence has at least one action predicted, if the current action is not
                                 # the same as the last action, append it, otherwise just append
                                 if len(sentence) > 0:
