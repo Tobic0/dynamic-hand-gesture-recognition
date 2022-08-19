@@ -2,6 +2,7 @@
 # Documentation for the RNN structure and training. \n
 # This code is used to define the recurrent neural network and to train it on the input data extracted
 # with extract_from_video
+import tensorflow as tf
 from sklearn.model_selection import train_test_split
 from tensorflow.keras.utils import to_categorical
 from keras.models import Sequential
@@ -12,6 +13,8 @@ import os
 
 ## Define path where to save the gesture keypoints
 PATH = os.path.join('video/gestures_data')
+## Define path where to save tensorflow lite version of the model
+TF_LITE_PATH = 'gesture.tflite'
 
 ## Read gesture classes defined in file CLASSES.txt
 actions = np.array(open("CLASSES.txt").read().splitlines())
@@ -55,6 +58,7 @@ model = Sequential()
 model.add(LSTM(32, activation='relu', input_shape=(sequence_length, 63)))
 model.add(Dropout(0.4))
 model.add(Dense(32, activation='relu'))
+model.add(Dense(32, activation='relu'))
 model.add(Dense(actions.shape[0], activation='softmax'))
 
 model.summary()
@@ -65,3 +69,12 @@ print(history.history.keys())
 
 # Save model weights
 model.save('gesture.h5')
+
+# Convert model to tensorflow lite
+converter = tf.lite.TFLiteConverter.from_keras_model(model)
+# Enable tensorflow ops
+converter.target_spec.supported_ops = [ tf.lite.OpsSet.TFLITE_BUILTINS, tf.lite.OpsSet.SELECT_TF_OPS]
+converter.optimizations = [tf.lite.Optimize.DEFAULT]
+tflite_quantized_model = converter.convert()
+open(TF_LITE_PATH, 'wb').write(tflite_quantized_model)
+
