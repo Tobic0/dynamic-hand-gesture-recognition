@@ -23,6 +23,7 @@ var namespaces_dup =
       [ "PATH", "namespacekeypoint__classification.html#af7541b1eb159786e2e0e1012146d8762", null ],
       [ "sequence_length", "namespacekeypoint__classification.html#a8b212efa68d07c76c2438ba9bd5153f8", null ],
       [ "sequences", "namespacekeypoint__classification.html#a9b1cee93b1ae1ffd6cd03cbcb77870de", null ],
+      [ "TF_LITE_PATH", "namespacekeypoint__classification.html#af45843b58403407db46cd82443a96cc5", null ],
       [ "window", "namespacekeypoint__classification.html#a04f77c4aaeb0d260fddaf3d797c96c85", null ],
       [ "X", "namespacekeypoint__classification.html#a2620f665234a8bd574f4f38543283f3c", null ],
       [ "X_train", "namespacekeypoint__classification.html#a84009eafc4d291b109670adec828a60c", null ],
@@ -37,11 +38,12 @@ var namespaces_dup =
       [ "mp_drawing", "namespacemain.html#a9ce300c03e016e68fc93ee598e445465", null ],
       [ "mp_drawing_styles", "namespacemain.html#ae198c4904497f0e73423168d32de032c", null ],
       [ "mp_hands", "namespacemain.html#ab57a17ce943c331a0b894b725a1ac412", null ],
-      [ "sequence_length", "namespacemain.html#a748b4e085d5d6d7bd9ff647002fd5a58", null ]
+      [ "sequence_length", "namespacemain.html#a748b4e085d5d6d7bd9ff647002fd5a58", null ],
+      [ "TF_LITE_PATH", "namespacemain.html#aac82dff09490814844645233e82a95a0", null ]
     ] ],
     [ "video_augmentation", "namespacevideo__augmentation.html", [
       [ "augment_video", "namespacevideo__augmentation.html#a5cf8c0e8b6b5e56b27cf091170475c45", null ],
-      [ "random_brightness", "namespacevideo__augmentation.html#a169105d7ce8b93ce40a7a79a5d61b7ca", null ],
+      [ "random_brightness", "namespacevideo__augmentation.html#a5c6ec966a0a3cbbd0e492211e012da54", null ],
       [ "random_rotate", "namespacevideo__augmentation.html#a961df8d74a0920d585e6d7b666cc289c", null ],
       [ "actions", "namespacevideo__augmentation.html#a13c23111a9819c843a33f59771057328", null ],
       [ "no_augmentation", "namespacevideo__augmentation.html#a73a3da32d762e8c265402585deac998e", null ],

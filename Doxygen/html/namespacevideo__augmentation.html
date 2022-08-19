@@ -97,9 +97,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a961df8d74a0920d585e6d7b666cc289c"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacevideo__augmentation.html#a961df8d74a0920d585e6d7b666cc289c">random_rotate</a> (min_rotation=-15, max_rotation=15, step_rotation=5)</td></tr>
 <tr class="memdesc:a961df8d74a0920d585e6d7b666cc289c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for generating random rotation, by default, between -15 and 15 degrees with a step rotation of 5 degree.  <a href="namespacevideo__augmentation.html#a961df8d74a0920d585e6d7b666cc289c">More...</a><br /></td></tr>
 <tr class="separator:a961df8d74a0920d585e6d7b666cc289c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a169105d7ce8b93ce40a7a79a5d61b7ca"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacevideo__augmentation.html#a169105d7ce8b93ce40a7a79a5d61b7ca">random_brightness</a> (min_brightness=1, max_brightness=180, step_brightness=10)</td></tr>
-<tr class="memdesc:a169105d7ce8b93ce40a7a79a5d61b7ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for generating random brightness values, by default, between 1 and 180 with a step of 10.  <a href="namespacevideo__augmentation.html#a169105d7ce8b93ce40a7a79a5d61b7ca">More...</a><br /></td></tr>
-<tr class="separator:a169105d7ce8b93ce40a7a79a5d61b7ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c6ec966a0a3cbbd0e492211e012da54"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacevideo__augmentation.html#a5c6ec966a0a3cbbd0e492211e012da54">random_brightness</a> (min_brightness=1, max_brightness=170, step_brightness=10)</td></tr>
+<tr class="memdesc:a5c6ec966a0a3cbbd0e492211e012da54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for generating random brightness values, by default, between 1 and 180 with a step of 10.  <a href="namespacevideo__augmentation.html#a5c6ec966a0a3cbbd0e492211e012da54">More...</a><br /></td></tr>
+<tr class="separator:a5c6ec966a0a3cbbd0e492211e012da54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5cf8c0e8b6b5e56b27cf091170475c45"><td class="memItemLeft" align="right" valign="top"><a id="a5cf8c0e8b6b5e56b27cf091170475c45" name="a5cf8c0e8b6b5e56b27cf091170475c45"></a>
 def&#160;</td><td class="memItemRight" valign="bottom"><b>augment_video</b> ()</td></tr>
 <tr class="memdesc:a5cf8c0e8b6b5e56b27cf091170475c45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main function of <a class="el" href="namespacevideo__augmentation.html" title="Documentation for video augmentation application.">video_augmentation</a> which iterates over all prerecorded videos found in PATH_VIDEO_RAW, extract each frame and applies augmentation by generating copies of the original frames but with random brightness and rotation applied. <br /></td></tr>
@@ -138,8 +138,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>no_augmentation</b> = 
  This code is used for generating new modified videos from an original video (video augmentation) that were recorder with the <a class="el" href="namespacevideo__recorder.html" title="Documentation for video recorder application.">video_recorder</a> or with external tools and put inside the PATH_VIDEO_RAW folder. <br  />
  In particular this program generates no_augmentation of videos by modifying the brightness and applying random rotation to copies of the original frames collection. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a169105d7ce8b93ce40a7a79a5d61b7ca" name="a169105d7ce8b93ce40a7a79a5d61b7ca"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a169105d7ce8b93ce40a7a79a5d61b7ca">&#9670;&nbsp;</a></span>random_brightness()</h2>
+<a id="a5c6ec966a0a3cbbd0e492211e012da54" name="a5c6ec966a0a3cbbd0e492211e012da54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c6ec966a0a3cbbd0e492211e012da54">&#9670;&nbsp;</a></span>random_brightness()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -154,7 +154,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>no_augmentation</b> = 
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>max_brightness</em> = <code>180</code>, </td>
+          <td class="paramname"><em>max_brightness</em> = <code>170</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>

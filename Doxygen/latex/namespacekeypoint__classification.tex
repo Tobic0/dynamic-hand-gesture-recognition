@@ -11,6 +11,9 @@ Documentation for the RNN structure and training.
 \mbox{\Hypertarget{namespacekeypoint__classification_af7541b1eb159786e2e0e1012146d8762}\label{namespacekeypoint__classification_af7541b1eb159786e2e0e1012146d8762}} 
 {\bfseries PATH} = os.\+path.\+join(\textquotesingle{}video/gestures\+\_\+data\textquotesingle{})
 \begin{DoxyCompactList}\small\item\em Define path where to save the gesture keypoints. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespacekeypoint__classification_af45843b58403407db46cd82443a96cc5}\label{namespacekeypoint__classification_af45843b58403407db46cd82443a96cc5}} 
+string {\bfseries TF\+\_\+\+LITE\+\_\+\+PATH} = \textquotesingle{}gesture.\+tflite\textquotesingle{}
+\begin{DoxyCompactList}\small\item\em Define path where to save tensorflow lite version of the model. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{namespacekeypoint__classification_a5000494b4b18c1e888f68bb3e8fe447b}\label{namespacekeypoint__classification_a5000494b4b18c1e888f68bb3e8fe447b}} 
 {\bfseries actions} = np.\+array(open(\char`\"{}CLASSES.\+txt\char`\"{}).read().splitlines())
 \begin{DoxyCompactList}\small\item\em Read gesture classes defined in file CLASSES.\+txt. \end{DoxyCompactList}\item 
@@ -76,6 +79,18 @@ list {\bfseries window} = \mbox{[}$\,$\mbox{]}
 \item 
 \mbox{\Hypertarget{namespacekeypoint__classification_a4edd853ddd608c6f444ac9a734f07ea3}\label{namespacekeypoint__classification_a4edd853ddd608c6f444ac9a734f07ea3}} 
 {\bfseries history} = model.\+fit(\mbox{\hyperlink{namespacekeypoint__classification_a84009eafc4d291b109670adec828a60c}{X\+\_\+train}}, y\+\_\+train, epochs=250, callbacks=\mbox{[}tb\+\_\+callback\mbox{]})
+\item 
+\mbox{\Hypertarget{namespacekeypoint__classification_a567a998d1658288ab12a3eda364bbb0f}\label{namespacekeypoint__classification_a567a998d1658288ab12a3eda364bbb0f}} 
+{\bfseries converter} = tf.\+lite.\+TFLite\+Converter.\+from\+\_\+keras\+\_\+model(\mbox{\hyperlink{namespacekeypoint__classification_a8c63139801f7ad6b9b6739a81a9a2ffa}{model}})
+\item 
+\mbox{\Hypertarget{namespacekeypoint__classification_a9cb6d98165001485da3472d5364565be}\label{namespacekeypoint__classification_a9cb6d98165001485da3472d5364565be}} 
+{\bfseries supported\+\_\+ops}
+\item 
+\mbox{\Hypertarget{namespacekeypoint__classification_a3fc9da5d6e4cb28753dd2dcf1e56812f}\label{namespacekeypoint__classification_a3fc9da5d6e4cb28753dd2dcf1e56812f}} 
+{\bfseries optimizations}
+\item 
+\mbox{\Hypertarget{namespacekeypoint__classification_a2ee133c7451b0f7d081d077a318a936f}\label{namespacekeypoint__classification_a2ee133c7451b0f7d081d077a318a936f}} 
+{\bfseries tflite\+\_\+quantized\+\_\+model} = converter.\+convert()
 \end{DoxyCompactItemize}
 
 

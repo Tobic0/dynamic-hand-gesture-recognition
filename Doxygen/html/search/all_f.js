@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['window_0',['window',['../namespacekeypoint__classification.html#a04f77c4aaeb0d260fddaf3d797c96c85',1,'keypoint_classification']]]
+  ['video_5faugmentation_0',['video_augmentation',['../namespacevideo__augmentation.html',1,'']]],
+  ['video_5frecorder_1',['video_recorder',['../namespacevideo__recorder.html',1,'']]]
 ];

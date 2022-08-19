@@ -97,6 +97,10 @@ Variables</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>PATH</b> = os.path.join('video/gestures_data')</td></tr>
 <tr class="memdesc:af7541b1eb159786e2e0e1012146d8762"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define path where to save the gesture keypoints. <br /></td></tr>
 <tr class="separator:af7541b1eb159786e2e0e1012146d8762"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af45843b58403407db46cd82443a96cc5"><td class="memItemLeft" align="right" valign="top"><a id="af45843b58403407db46cd82443a96cc5" name="af45843b58403407db46cd82443a96cc5"></a>
+string&#160;</td><td class="memItemRight" valign="bottom"><b>TF_LITE_PATH</b> = 'gesture.tflite'</td></tr>
+<tr class="memdesc:af45843b58403407db46cd82443a96cc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define path where to save tensorflow lite version of the model. <br /></td></tr>
+<tr class="separator:af45843b58403407db46cd82443a96cc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5000494b4b18c1e888f68bb3e8fe447b"><td class="memItemLeft" align="right" valign="top"><a id="a5000494b4b18c1e888f68bb3e8fe447b" name="a5000494b4b18c1e888f68bb3e8fe447b"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>actions</b> = np.array(open(&quot;CLASSES.txt&quot;).read().splitlines())</td></tr>
 <tr class="memdesc:a5000494b4b18c1e888f68bb3e8fe447b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read gesture classes defined in file CLASSES.txt. <br /></td></tr>
@@ -174,6 +178,18 @@ list&#160;</td><td class="memItemRight" valign="bottom"><b>window</b> = []</td><
 <tr class="memitem:a4edd853ddd608c6f444ac9a734f07ea3"><td class="memItemLeft" align="right" valign="top"><a id="a4edd853ddd608c6f444ac9a734f07ea3" name="a4edd853ddd608c6f444ac9a734f07ea3"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>history</b> = model.fit(<a class="el" href="namespacekeypoint__classification.html#a84009eafc4d291b109670adec828a60c">X_train</a>, y_train, epochs=250, callbacks=[tb_callback])</td></tr>
 <tr class="separator:a4edd853ddd608c6f444ac9a734f07ea3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a567a998d1658288ab12a3eda364bbb0f"><td class="memItemLeft" align="right" valign="top"><a id="a567a998d1658288ab12a3eda364bbb0f" name="a567a998d1658288ab12a3eda364bbb0f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>converter</b> = tf.lite.TFLiteConverter.from_keras_model(<a class="el" href="namespacekeypoint__classification.html#a8c63139801f7ad6b9b6739a81a9a2ffa">model</a>)</td></tr>
+<tr class="separator:a567a998d1658288ab12a3eda364bbb0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cb6d98165001485da3472d5364565be"><td class="memItemLeft" align="right" valign="top"><a id="a9cb6d98165001485da3472d5364565be" name="a9cb6d98165001485da3472d5364565be"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>supported_ops</b></td></tr>
+<tr class="separator:a9cb6d98165001485da3472d5364565be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fc9da5d6e4cb28753dd2dcf1e56812f"><td class="memItemLeft" align="right" valign="top"><a id="a3fc9da5d6e4cb28753dd2dcf1e56812f" name="a3fc9da5d6e4cb28753dd2dcf1e56812f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>optimizations</b></td></tr>
+<tr class="separator:a3fc9da5d6e4cb28753dd2dcf1e56812f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ee133c7451b0f7d081d077a318a936f"><td class="memItemLeft" align="right" valign="top"><a id="a2ee133c7451b0f7d081d077a318a936f" name="a2ee133c7451b0f7d081d077a318a936f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>tflite_quantized_model</b> = converter.convert()</td></tr>
+<tr class="separator:a2ee133c7451b0f7d081d077a318a936f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Documentation for the RNN structure and training. </p>
