@@ -64,7 +64,7 @@ model.add(Dense(actions.shape[0], activation='softmax'))
 model.summary()
 
 model.compile(optimizer='Adam', loss='categorical_crossentropy', metrics=['categorical_accuracy'])
-history = model.fit(X_train, y_train, epochs=250, callbacks=[tb_callback])
+history = model.fit(X_train, y_train, epochs=200, callbacks=[tb_callback])
 print(history.history.keys())
 
 # Save model weights
