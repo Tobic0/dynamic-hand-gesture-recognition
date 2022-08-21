@@ -28,10 +28,13 @@ def process_landmarks(landmarks, image):
         h_landmarks[i][1] = h_landmarks[i][1] * h
 
     # Transform landmarks to relative position with respect to wrist keypoint (keypoint 0)
+    x_keypoint_0 = h_landmarks[0][0]
+    y_keypoint_0 = h_landmarks[0][1]
+    z_keypoint_0 = h_landmarks[0][2]
     for i in range(len(h_landmarks)):
-        h_landmarks[i][0] = h_landmarks[i][0] - h_landmarks[0][0]
-        h_landmarks[i][1] = h_landmarks[i][1] - h_landmarks[0][1]
-        h_landmarks[i][2] = h_landmarks[i][2] - h_landmarks[0][2]
+        h_landmarks[i][0] = h_landmarks[i][0] - x_keypoint_0
+        h_landmarks[i][1] = h_landmarks[i][1] - y_keypoint_0
+        h_landmarks[i][2] = h_landmarks[i][2] - z_keypoint_0
 
     # Convert landmarks list into a one-dimensional list of length 63 (21*3)
     h_landmarks = np.array(h_landmarks).flatten()
