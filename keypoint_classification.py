@@ -10,6 +10,7 @@ from keras.layers import LSTM, Dense, Dropout
 from keras.callbacks import TensorBoard
 import numpy as np
 import os
+import matplotlib.pyplot as plt
 
 ## Define path where to save the gesture keypoints
 PATH = os.path.join('video/gestures_data')
@@ -64,8 +65,32 @@ model.add(Dense(actions.shape[0], activation='softmax'))
 model.summary()
 
 model.compile(optimizer='Adam', loss='categorical_crossentropy', metrics=['categorical_accuracy'])
-history = model.fit(X_train, y_train, epochs=200, callbacks=[tb_callback])
+history = model.fit(X_train, y_train, epochs=200, callbacks=[tb_callback], validation_split=0.1)
 print(history.history.keys())
+
+# Use the test dataset to evaluate the overall performance of the neural network and plot the training and tests results
+# Evaluate model loss and categorical_accuracy on test dataset
+val_loss, val_accuracy = model.evaluate(X_test, y_test)
+
+# Plot categorical accuracy history of the model
+fig, ax = plt.subplots(figsize=(7, 6))
+plt.plot(history.history['categorical_accuracy'])
+plt.plot(history.history['val_categorical_accuracy'])
+plt.title('model accuracy')
+plt.ylabel('categorical_accuracy')
+plt.xlabel('epoch')
+plt.legend(['train', 'test'], loc='upper left')
+
+# Plot loss history of the model
+fig, ax = plt.subplots(figsize=(7, 6))
+plt.plot(history.history['loss'])
+plt.plot(history.history['val_loss'])
+plt.title('model loss')
+plt.ylabel('loss')
+plt.xlabel('epoch')
+plt.legend(['train', 'test'], loc='upper left')
+# Plot both plots
+plt.show()
 
 # Save model weights
 model.save('gesture.h5')
