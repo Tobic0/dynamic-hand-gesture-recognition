@@ -47,6 +47,10 @@ def draw_options(_image, op=0):
                     (0, 0, 0), 2)
         cv2.putText(_image, "Press 0 to go back", (5, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.5,
                     (255, 255, 255), 1)
+        cv2.putText(_image, "Press 'spacebar' to record gesture", (5, 80), cv2.FONT_HERSHEY_SIMPLEX, 0.5,
+                    (0, 0, 0), 2)
+        cv2.putText(_image, "Press 'spacebar' to record gesture", (5, 80), cv2.FONT_HERSHEY_SIMPLEX, 0.5,
+                    (255, 255, 255), 1)
 
 
 ## Function for selecting the option from list by pressing on keyboard
