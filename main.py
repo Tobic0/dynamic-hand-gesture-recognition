@@ -33,6 +33,8 @@ import cv2
 import mediapipe as mp
 import landmarks_transformer as lt
 import time
+# import rospy
+# from std_msgs.msg import String
 
 # Mediapipe setup variables for indicating type of ML solution
 ## MediaPipe solution drawing utils
@@ -52,6 +54,9 @@ sequence_length = 30
 
 ## Main function for real time application
 def main():
+    # Start rospy node
+    # rospy.init_node('hand_gesture_recognizer')
+    # pub = rospy.Publisher('/hand_gesture', String, queue_size=10)
     # Load keras classification model in order to predict gesture
     model = keras.models.load_model('gesture.h5')
 
@@ -130,6 +135,7 @@ def main():
                                 # Check if sentence has at least one action predicted, if the current action is not
                                 # the same as the last action, append it, otherwise just append
                                 if len(sentence) > 0:
+                                    # pub.publish(actions[np.argmax(res)])
                                     if actions[np.argmax(res)] != sentence[-1]:
                                         sentence.append(actions[np.argmax(res)])
                                 else:
