@@ -4,6 +4,7 @@
 # with extract_from_video
 import tensorflow as tf
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import confusion_matrix, classification_report
 from tensorflow.keras.utils import to_categorical
 from keras.models import Sequential
 from keras.layers import LSTM, Dense, Dropout
@@ -11,6 +12,23 @@ from keras.callbacks import TensorBoard
 import numpy as np
 import os
 import matplotlib.pyplot as plt
+import seaborn as sb
+
+## Function used to plot the confusion matrix
+# - y_true: set of true values
+# - y_pre: set of predicted values
+def plot_confusion_matrix(y_true, y_pre):
+    cf_matrix = confusion_matrix(y_true, y_pre)
+
+    fig, ax = plt.subplots(figsize=(7, 6))
+    sb.heatmap(cf_matrix, annot=True, cmap='viridis', fmt='d', square=False)
+    ax.set_title('Confusion matrix')
+    ax.set_xlabel('Predicted class')
+    ax.set_ylabel('Actual class')
+
+    print('Classification Report')
+    print(classification_report(y_test, y_pred))
+
 
 ## Define path where to save the gesture keypoints
 PATH = os.path.join('video/gestures_data')
@@ -71,6 +89,12 @@ print(history.history.keys())
 # Use the test dataset to evaluate the overall performance of the neural network and plot the training and tests results
 # Evaluate model loss and categorical_accuracy on test dataset
 val_loss, val_accuracy = model.evaluate(X_test, y_test)
+
+# Plot confusion matrix
+y_pred = np.argmax(model.predict(X_test), axis=1)
+y_test = np.argmax(y_test, axis=1)
+
+plot_confusion_matrix(y_test, y_pred)
 
 # Plot categorical accuracy history of the model
 fig, ax = plt.subplots(figsize=(7, 6))
